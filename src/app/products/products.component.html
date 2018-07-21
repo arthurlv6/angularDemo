@@ -1,0 +1,76 @@
+<table class="table table-bordered table-hover table-condensed">
+  <tr style="background-color: darkgray;">
+      <th>
+          Name
+      </th>
+      <th>
+          Price
+      </th>
+      <th>
+          ProductCode
+      </th>
+      <th>
+          RRP
+      </th>
+      <th>
+        Category
+    </th>
+      <th>Operation</th>
+  </tr>
+  <ng-template ngFor let-product [ngForOf]="products">
+    <tr>
+        <td >
+            {{product.name}}
+        </td>
+        <td>
+            {{product.price | currency:'NZD'}}
+        </td>
+        <td>
+            {{product.productCode}}
+        </td>
+        <td>
+            {{product.rrp}}
+        </td>
+        <td>
+            {{product.productCategory?.name}}
+        </td>
+        <td>
+            <a class="fa fa-chevron-circle-down"  style="cursor:pointer" (click)="showDetail(product)"></a> |
+            <a class="fa fa-pencil-square-o" (click)="openModal(edit,product,false)" ></a> |
+            <a class="fa fa-trash" (click)="openModal(deleteConfirm,product,true)"></a>
+        </td>
+    </tr> 
+    <tr *ngIf="product.hidden && product.hidden===true">
+        <td colspan=6>
+            <app-product-detail [product]="product">
+            </app-product-detail>
+        </td>
+    </tr>
+  </ng-template>
+</table>
+  
+<ng-template #deleteConfirm>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete item</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  <div class="modal-body text-center">
+    <p>Do you want to delete {{product.name}}?</p>
+      <button type="button" class="btn btn-default" (click)="confirm()" style="margin-right: 20px;" >Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>
+<ng-template #edit>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+      <p>{{product.name}}
+    </div>
+</ng-template>
+

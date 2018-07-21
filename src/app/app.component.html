@@ -1,0 +1,276 @@
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <i class="fa fa-globe"></i> Inventory managment</div>
+        </div>
+        <div class="navbar-right" style="margin-right: 0px;">
+            <ul class="nav navbar-nav">
+                <!-- Notifications: style can be found in dropdown.less -->
+                <li *ngIf="!loginRequired" class="dropdown user user-menu" dropdown>
+                        <a id="button-basic" style="cursor: pointer;" dropdownToggle class="dropdown-toggle" aria-controls="dropdown-basic" >
+                            <i class="fa fa-warning"></i>
+                        </a>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+
+                            <li role="menuitem">
+                                    <a class="dropdown-item">
+                                        <i class="fa fa-money success"></i> notification.Sales
+                                    </a>
+                                </li>
+                                <li role="menuitem">
+                                    <a class="dropdown-item">
+                                        <i class="fa fa-truck info"></i>notification.Purchase
+                                    </a>
+                                </li>
+                                <li role="menuitem">
+                                    <a href="/Inventory/Index">
+                                        <i class="fa fa-warning danger"></i> notification.InventoryAlert
+                                    </a>
+                                </li>
+                                <li role="menuitem">
+                                    <a href="/Product/Index">
+                                        <i class="fa fa-gift info"></i> notification.NewProduct
+                                    </a>
+                                </li>
+
+                                <li role="menuitem">
+                                    <a href="/Setting/Operator/Index">
+                                        <i class="fa fa-person warning"></i> notification.NewUser
+                                    </a>
+                                </li>
+                        </ul>
+                </li>
+
+                <!-- User Account: style can be found in dropdown.less -->
+                <li *ngIf="!loginRequired" class="dropdown user user-menu">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>Arthur
+                        </span>
+                    </a>
+
+                </li>
+                <li *ngIf="!loginRequired">
+                    <a class="navbar-right" style="cursor: pointer;" (click)="logout()">Logout</a>
+                </li>
+                <li *ngIf="loginRequired">
+                    <a class="navbar-right" [routerLink]="['login']">Login</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="left-side sidebar-offcanvas">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src='http://inventory.arthurdid.net/images/UserHeader/8a163d20-1967-465a-8484-867ee5e6002f.png' class="img-circle" alt="User Image"
+                    />
+                </div>
+                <div class="pull-left info">
+                    <p>Name</p>
+                    <a href="#">
+                        <i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li id="Home">
+                    <a href="" [routerLink]="['dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li id="Setting">
+                    <a href="" [routerLink]="['settings']" routerLinkActive="active">
+                        <i class="fa fa-gears"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li id="Product">
+                    <a href="" [routerLink]="['products']" routerLinkActive="active">
+                        <i class="fa fa-gift"></i>
+                        <span>Products</span>
+                        <small class="badge pull-right bg-light-blue-gradient">123</small>
+                    </a>
+                </li>
+                <li id="Inventory">
+                    <a href="" [routerLink]="['inventories']" routerLinkActive="active">
+                        <i class="fa fa-sitemap"></i>
+                        <span>Inventories</span>
+
+                    </a>
+                </li>
+                <li id="Suppliers">
+                    <a href="" [routerLink]="['suppliers']" routerLinkActive="active">
+                        <i class="fa fa-group"></i>
+                        <span>Suppliers</span>
+                        <small class="badge pull-right bg-light-blue-gradient">123</small>
+                    </a>
+                </li>
+                <li id="Purchase">
+                    <a href="" [routerLink]="['purchases']" routerLinkActive="active">
+                        <i class="fa fa-truck"></i>
+                        <span>Purchases</span>
+                        <small class="badge pull-right bg-light-blue-gradient">423</small>
+                    </a>
+                </li>
+                <li id="Customer">
+                    <a href="" [routerLink]="['customers']" routerLinkActive="active">
+                        <i class="fa fa-smile-o"></i>
+                        <span>Customers</span>
+                        <small class="badge pull-right bg-light-blue-gradient">2000</small>
+                    </a>
+                </li>
+                <li id="Sale">
+                    <a href="" [routerLink]="['sales']" routerLinkActive="active">
+                        <i class="fa fa-money"></i>
+                        <span>Sales</span>
+                        <small class="badge pull-right bg-light-blue-gradient">50000</small>
+                    </a>
+                </li>
+                <li id="Report">
+                    <a href="" [routerLink]="['report']" routerLinkActive="active">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li id="website">
+                    <a href="" [routerLink]="['website']" routerLinkActive="active">
+                        <i class='fa fa-cloud'></i>
+                        <span>Web Site</span>
+                    </a>
+                </li>
+                <li id="Manual">
+                    <a href="">
+                        <i class="fa fa-comments"></i>
+                        <span>Manual</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <aside class="right-side">
+        <section class="content-header">
+            <app-title>
+            </app-title>
+        </section>
+        <!-- Main content -->
+        <section class="content" style="min-height: 600px;">
+
+            <router-outlet></router-outlet>
+            <div class="alert alert-info alert-dismissable" id="message" style="z-index:100; display: none; position: fixed; top: 50%; left: 50%; margin-top: -20px;">
+                <i class="fa fa-check"></i>
+                <button type="button" class="close" onclick="hideMessage()">&times;</button>
+                <b>Message</b>
+                <span></span>
+            </div>
+        </section>
+        <!-- /.content -->
+        <footer>
+            <div class="content-wrapper">
+                <div style="text-align: center">
+                    <p>&copy; @DateTime.Now.Year - Inventory and Accounting Application
+                        <a target="_block" href="http://www.arthurcv.com">Powered by Arthur</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </aside>
+    <!-- /.right-side -->
+    <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    </div>
+    <div class="modal fade" id="userProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    </div>
+</div>
+<!-- ./wrapper -->
+
+<script type="text/javascript">
+    function showMessage(status, input) {
+        var message = $("#message");
+        $("#message span").html(input);
+        message.css("margin-left", -parseInt(message.css("width")) / 2);
+
+        if (status == "Normal") {
+            if (!message.hasClass("alert-info")) {
+                message.addClass("alert-info");
+            }
+            if (message.hasClass("alert-danger")) {
+                message.removeClass("alert-danger");
+            }
+            $("#message b").html("Message");
+            message.css("display", "block").delay(3000).fadeOut();
+        } else {
+            if (message.hasClass("alert-info")) {
+                message.removeClass("alert-info");
+            }
+            if (!message.hasClass("alert-danger")) {
+                message.addClass("alert-danger");
+            }
+            $("#message b").html("Alert!");
+            message.css("display", "block");
+        }
+        return false;
+    }
+    function hideMessage() {
+        var message = $("#message");
+        message.css("display", "none");
+    }
+</script>
+<script>
+    $(function () {
+        function _fix() {
+            var h = $(window).height();
+            var w = $(window).width();
+            $("#preview-iframe").css({
+                width: w + "px",
+                height: (h - 50) + "px"
+            });
+        }
+        _fix();
+        $(window).resize(function () {
+            _fix();
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+
+        function iframe_width(width) {
+            $("#preview-iframe").animate({ width: width }, 500);
+        }
+
+        $("#display-full").click(function (e) {
+            e.preventDefault();
+            iframe_width("100%");
+        });
+
+        $("#display-940").click(function (e) {
+            e.preventDefault();
+            iframe_width("940px");
+        });
+
+        $("#display-480").click(function (e) {
+            e.preventDefault();
+            iframe_width("480px");
+        });
+
+        $("#remove-frame").click(function (e) {
+            e.preventDefault();
+            window.location.href = "http://almsaeedstudio.com/AdminLTE";
+        });
+
+        $(".ad").hide().delay(3000).show(500);
+
+        $("#close-ad").click(function (e) {
+            e.preventDefault();
+            $(".ad").remove();
+        });
+
+    });
+</script>

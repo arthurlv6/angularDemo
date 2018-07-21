@@ -1,0 +1,137 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="rows" *ngIf="supplierForm">
+    <form [formGroup]="supplierForm" (ngSubmit)="saveSession()" autocomplete="off">
+      <div class="col-md-4">
+        <div class="form-group" [ngClass]="{'error': supplierForm.get('name').invalid && supplierForm.get('name').dirty }">
+          <label for="name">Name:</label>
+          <em *ngIf="supplierForm.get('name').invalid && supplierForm.get('name').dirty">Required</em>
+          <input formControlName="name" id="name" type="text" class="form-control" placeholder="name..." />
+        </div>
+        <div class="form-group">
+          <label for="gstNumber">gstNumber:</label>
+          <input formControlName="gstNumber" id="gstNumber" type="text" class="form-control" placeholder="GST..." />
+        </div>
+
+        <div class="form-group">
+          <label for="taxRate">taxRate:</label>
+          <input formControlName="taxRate" id="taxRate" type="text" class="form-control" placeholder="taxRate..." />
+        </div>
+        <div class="form-group">
+          <label for="bankName">bankName:</label>
+          <input formControlName="bankName" id="bankName" type="text" class="form-control" placeholder="bankName..." />
+        </div>
+        <div class="form-group">
+          <label for="bankBranch">bankBranch:</label>
+          <input formControlName="bankBranch" id="bankBranch" type="text" class="form-control" placeholder="bankBranch..." />
+        </div>
+
+        <div class="form-group">
+          <label for="paymentTerm">paymentTerm:</label>
+          <input formControlName="paymentTerm" id="paymentTerm" type="text" class="form-control" placeholder="paymentTerm..." />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="physicalName">physicalName:</label>
+          <input formControlName="physicalName" id="physicalName" type="text" class="form-control" placeholder="physicalName..." />
+        </div>
+        <div class="form-group">
+          <label for="physicalStreetAddress">physicalStreetAddress:</label>
+          <input formControlName="physicalStreetAddress" id="physicalStreetAddress" type="text" class="form-control" placeholder="physicalStreetAddress..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="physicalSuburb">physicalSuburb:</label>
+          <input formControlName="physicalSuburb" id="physicalSuburb" type="text" class="form-control" placeholder="physicalSuburb..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="physicalCity">physicalCity:</label>
+          <input formControlName="physicalCity" id="physicalCity" type="text" class="form-control" placeholder="physicalCity..." />
+        </div>
+        <div class="form-group">
+          <label for="physicalState">physicalState:</label>
+          <input formControlName="physicalState" id="physicalState" type="text" class="form-control" placeholder="physicalState..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="physicalCountry">physicalCountry:</label>
+          <input formControlName="physicalCountry" id="physicalCountry" type="text" class="form-control" placeholder="physicalCountry..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="physicalPostalCode">physicalPostalCode:</label>
+          <input formControlName="physicalPostalCode" id="physicalPostalCode" type="text" class="form-control" placeholder="physicalPostalCode..."
+          />
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="contactFirstName">contactFirstName:</label>
+          <input formControlName="contactFirstName" id="contactFirstName" type="text" class="form-control" placeholder="contactFirstName..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="contactLastName">contactLastName:</label>
+          <input formControlName="contactLastName" id="contactLastName" type="text" class="form-control" placeholder="contactLastName..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">contactEmail:</label>
+          <input formControlName="contactEmail" id="contactEmail" type="text" class="form-control" placeholder="contactEmail..." />
+        </div>
+        <div class="form-group">
+          <label for="contactOfficePhone">contactOfficePhone:</label>
+          <input formControlName="contactOfficePhone" id="contactOfficePhone" type="text" class="form-control" placeholder="contactOfficePhone..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="contactWebsite">contactWebsite:</label>
+          <input formControlName="contactWebsite" id="contactWebsite" type="text" class="form-control" placeholder="contactWebsite..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="contactPhoneNumber">contactPhoneNumber:</label>
+          <input formControlName="contactPhoneNumber" id="contactPhoneNumber" type="text" class="form-control" placeholder="contactPhoneNumber..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="contactFaxNumber">contactFaxNumber:</label>
+          <input formControlName="contactFaxNumber" id="contactFaxNumber" type="text" class="form-control" placeholder="contactFaxNumber..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="contactMobileNumber">contactMobileNumber:</label>
+          <input formControlName="contactMobileNumber" id="contactMobileNumber" type="text" class="form-control" placeholder="contactMobileNumber..."
+          />
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group" [ngClass]="{'error': supplierForm.get('note').invalid && supplierForm.get('note').dirty }">
+          <label for="note">Note:</label>
+          <em *ngIf="supplierForm.get('note').invalid && supplierForm.get('note').dirty && supplierForm.get('note')?.errors.maxLength">Cannot exceed 400 characters</em>
+          <textarea formControlName="note" id="note" rows=3 class="form-control" placeholder="note..."></textarea>
+        </div>
+       
+      </div>
+      <div class="col-md-12">
+        <p *ngIf="message" class="alert alert-warning">{{message}}</p>
+        <br>
+        <div class="pull-right">
+            <button style="margin-right: 10px;" type="submit" [disabled]="supplierForm.invalid" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+        </div>
+          
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+</div>

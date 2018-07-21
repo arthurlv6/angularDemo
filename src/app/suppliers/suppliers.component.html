@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-md-3">
+        
+    </div>
+    <div class="col-md-6">
+        <div class="input-group">
+            <input class="form-control" (keydown.enter)="onSearchKeydown($event)" id="Name" name="Name" placeholder="Name or gstNumber" type="text" [(ngModel)]="searchContent"
+                autocomplete="off">
+
+            <span class="input-group-btn">
+                <button type="button" name="seach" id="search-btn" (click)="search()" class="btn btn-primary">Search</button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="btn-group pull-right">
+            <button class="btn btn-primary" (click)="addOrEdit()">Add</button>
+            <button class="btn btn-primary" >Import</button>
+            <button class="btn btn-primary" >Export</button>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row" *ngIf="suppliers; else loading">
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover table-condensed">
+            <tr class="info">
+                <th>
+                    Row
+                </th>
+                <th>
+                    <a style="cursor: pointer;" (click)="sortby('name')">Name
+                        <i *ngIf="sort=='name'" class="fa fa-arrow-up"></i>
+                        <i *ngIf="sort=='nameDesc'" class="fa fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th>
+                    GST Number
+                </th>
+                <th>
+                    Bank Name
+                </th>
+                <th>
+                    Payment Term
+                </th>
+                <th>
+                    <a style="cursor: pointer;" (click)="sortby('email')">Contact Email
+                        <i *ngIf="sort=='email'" class="fa fa-arrow-up"></i>
+                        <i *ngIf="sort=='emailDesc'" class="fa fa-arrow-down"></i>
+                    </a>
+
+                </th>
+                <th>
+                    <a style="cursor: pointer;" (click)="sortby('date')">Date
+                        <i *ngIf="sort=='date'" class="fa fa-arrow-up"></i>
+                        <i *ngIf="sort=='dateDesc'" class="fa fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th>Operation</th>
+            </tr>
+            <ng-template ngFor let-supplier let-i=index [ngForOf]="filterSupplers()">
+                <tr>
+                    <td>
+                            {{i+1}}
+                    </td>
+                    <td>
+                        {{supplier.name}}
+                    </td>
+                    <td>
+                        {{supplier.gstNumber}}
+                    </td>
+                    <td>
+                        {{supplier.bankName}}
+                    </td>
+                    <td>
+                        {{supplier.paymentTerm}}
+                    </td>
+                    <td>
+                        {{supplier.contactEmail}}
+                    </td>
+                    <td>
+                        {{supplier.modifiedDate | date:'short'}}
+                    </td>
+                    <td>
+                        <a class="fa fa-chevron-circle-down" style="cursor:pointer" (click)="showDetail(supplier)"></a> |
+                        <a class="fa fa-pencil-square-o" (click)="addOrEdit(supplier)"></a> |
+                        <a class="fa fa-trash" (click)="openModal(deleteConfirm,supplier,true)"></a>
+                    </td>
+                </tr>
+                <tr *ngIf="supplier.hidden && supplier.hidden===true">
+                    <td colspan=8>
+                        <app-supplier-detail [supplier]="supplier"></app-supplier-detail>
+                    </td>
+                </tr>
+            </ng-template>
+        </table>
+    </div>
+</div>
+
+<div class="row" *ngIf="total">
+    <div class="col-md-12">
+        <div class="text-center">
+            <pagination [totalItems]="total" [rotate]="false" [(ngModel)]="currentPage" [maxSize]="10" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
+</div>
+
+<ng-template #deleteConfirm>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete item</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>Do you want to delete {{supplier.name}}?</p>
+        <button type="button" class="btn btn-default" (click)="confirm()" style="margin-right: 20px;">Yes</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        <p *ngIf="errorMessage" class="alert alert-warning" style="margin-top:20px;">
+            {{errorMessage}}
+        </p>
+    </div>
+</ng-template>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<ng-template #addOredit>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>test</p>
+    </div>
+</ng-template>

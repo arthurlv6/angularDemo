@@ -1,0 +1,109 @@
+<div class="panel">
+    <div class="panel-body" style="background-color:white;padding:20px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Supplier:</label>
+                    <a style="cursor: pointer;" (click)="showDetail(product.supplier)">{{product.supplier.name}}</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Supplier Phone:</label>
+                    {{product.supplier?.contactMobileNumber}}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Supplier Address:</label>
+                    {{product.supplier?.postalAddress}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Category:</label>
+                    {{product.productCategory?.name}}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>productCode:</label>
+                    {{product.productCode}}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Basic Price:</label>
+                    {{product.basicPrice | currency:'NZD'}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Created Date:</label>
+                    {{product.createdDate | date:'short'}}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Last modified date:</label>
+                    {{product.modifiedDate | date:'short'}}
+                </div>
+            </div>
+
+        </div>
+        <label>Description</label>
+        <p>
+            {{product.description}}
+        </p>
+        <div style="margin-bottom: 20px;" *ngIf="product.productProperties || product.productImages">
+            <tabset>
+                <tab heading="Properties" *ngIf="product.productProperties && product.productProperties.length>0">
+                    <ul style="margin-top: 10px;">
+                        <li *ngFor="let pp of product.productProperties">
+                            {{pp.description}}
+                        </li>
+                    </ul>
+                </tab>
+                <tab style="margin-bottom: 10px;" heading="Images" *ngIf="product.productImages && product.productImages.length>0">
+                    <div class="col-sm-6 col-md-3" *ngFor="let pi of product.productImages">
+                        <div class="thumbnail">
+                            <img src={{pi.profile}} class="img-responsive" style="width:auto;height:140px;" (click)="showOrginalImage(image,pi.profile)"
+                                alt="...">
+                            <div class="caption">
+                                <h4>{{pi.description}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>
+<ng-template #deleteConfirm>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Delete item</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p>Do you want to delete {{product.name}}?</p>
+        <button type="button" class="btn btn-default" (click)="confirm()" style="margin-right: 20px;">Yes</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+</ng-template>
+<ng-template #image>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Orginal size image</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <img src="{{imagePath}}">
+    </div>
+</ng-template>
