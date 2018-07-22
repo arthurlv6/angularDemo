@@ -3,7 +3,7 @@ import { SuppliersService } from './suppliers.service';
 import { ISupplier } from '../Models/isupplier';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AppCommonService } from '../Shared/app-common.service';
-import { AddEditComponent } from './add-edit.component';
+import { SupplierAddEditComponent } from './supplier-add-edit.component';
 import { HttpError } from '../Models/http-error';
 
 @Component({
@@ -77,7 +77,7 @@ export class SuppliersComponent implements OnInit {
     const initialState = {
       supplier: this.supplier,
     };
-    this.modalService.show(AddEditComponent, { initialState, class: "modal-lg" })
+    this.modalService.show(SupplierAddEditComponent, { initialState, class: "modal-lg" })
   }
   pageChanged(event: any): void {
     this._supplierService.getSuppliers(this.searchContent, this.sort, this.pageSize, event.page).subscribe(

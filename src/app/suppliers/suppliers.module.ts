@@ -7,7 +7,7 @@ import { AppCommonModule } from '../Shared/app-common.module';
 import { SuppliersService } from './suppliers.service';
 import { SupplierDetailComponent } from './supplier-detail.component';
 import { SupplierDetailModalComponent } from './supplier-detail-modal.component';
-import { AddEditComponent } from './add-edit.component';
+import { SupplierAddEditComponent } from './supplier-add-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap';
 
@@ -24,7 +24,7 @@ import { PaginationModule } from 'ngx-bootstrap';
     SuppliersComponent,
     SupplierDetailComponent,
     SupplierDetailModalComponent,
-    AddEditComponent,
+    SupplierAddEditComponent,
   ],
   providers:[
     SuppliersService

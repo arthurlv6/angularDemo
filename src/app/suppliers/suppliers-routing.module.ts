@@ -4,7 +4,7 @@ import { SuppliersComponent } from './suppliers.component';
 import { SupplierDetailComponent } from './supplier-detail.component';
 import { IdGuard } from '../Shared/id.guard';
 import { AuthGuard } from '../Shared/auth.guard';
-import { AddEditComponent } from './add-edit.component';
+import { SupplierAddEditComponent } from './supplier-add-edit.component';
 
 const routes: Routes = [
   {
@@ -24,6 +24,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  entryComponents:[AddEditComponent]
+  entryComponents:[SupplierAddEditComponent]
 })
 export class SuppliersRoutingModule { }

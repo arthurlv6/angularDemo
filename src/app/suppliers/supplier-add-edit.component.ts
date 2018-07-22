@@ -7,10 +7,10 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { HttpError } from '../Models/http-error';
 
 @Component({
-  templateUrl: './add-edit.component.html',
-  styleUrls: ['./add-edit.component.css']
+  templateUrl: './supplier-add-edit.component.html',
+  styleUrls: ['./supplier-add-edit.component.css']
 })
-export class AddEditComponent implements OnInit {
+export class SupplierAddEditComponent implements OnInit {
 
   constructor(
     private _supplierService:SuppliersService,

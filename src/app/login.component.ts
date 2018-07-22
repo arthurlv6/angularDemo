@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     private _authService: AuthServerService, 
     private router: Router,
   private _appCommonService: AppCommonService) { }
-
+    loading:boolean=false;
   ngOnInit() {
     this._appCommonService.setupTitle("Login");
   }
@@ -25,11 +25,16 @@ export class LoginComponent implements OnInit {
     password: "Tomhack!123"
   };
   onLogin() {
+    this.loading=true;
     this._authService.login(this.creds)
       .subscribe(
         success => {
+          this.loading=false;
             this.router.navigate(["suppliers"]);
         },
-       err => this.errorMessage = "Failed to login");
+       err => {
+         this.errorMessage = "Failed to login";
+         this.loading=false;
+        });
   }
 }
