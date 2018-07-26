@@ -31,6 +31,7 @@ export class SupplierAddEditComponent implements OnInit {
   private setupFormIntial(supplier: ISupplier) {
       this.supplierForm = this._formBuilder.group(
         {
+          id:supplier.id,
           name:[supplier.name,Validators.required],
           gstNumber: supplier.gstNumber,
           note: [supplier.note,Validators.maxLength(400)],
