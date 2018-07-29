@@ -82,7 +82,7 @@
                 </div>
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
+            <ul class="sidebar-menu" *ngIf="!loginRequired">
                 <li id="Home">
                     <a href="" [routerLink]="['dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                         <i class="fa fa-dashboard"></i>

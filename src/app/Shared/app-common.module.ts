@@ -7,10 +7,21 @@ import { HttpCacheInterceptorInterceptor } from './http-cache-interceptor.interc
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpAddHeaderInterceptor } from './http-add-header.interceptor';
+import { BrowserModule } from '@angular/platform-browser';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    AngularFontAwesomeModule,
+    BrowserModule,
+    HttpClientModule,
+    NgxChartsModule,
+    BrowserAnimationsModule 
   ],
   declarations: [
      TitleComponent,
@@ -21,6 +32,11 @@ import { HttpAddHeaderInterceptor } from './http-add-header.interceptor';
     FormsModule,
     TitleComponent,
     LoadingComponent,
+    AngularFontAwesomeModule,
+    BrowserModule,
+    HttpClientModule,
+    NgxChartsModule,
+    BrowserAnimationsModule 
   ],
   providers:[
     CookieService,

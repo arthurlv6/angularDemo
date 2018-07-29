@@ -31,7 +31,6 @@ export interface ISupplier {
     contactMobileNumber?: any;
     contactDDINumber?: string;
     contactTollFreeNumber?: any;
-    createdDate?: any;
     modifiedDate?: any;
     deleted?: boolean;
     products?: any[];

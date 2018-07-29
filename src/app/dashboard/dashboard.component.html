@@ -10,12 +10,12 @@
                     Sales
                 </p>
             </div>
-            <a href="/Sale/Index">
+            <a href="" [routerLink]="['/sales']" routerLinkActive="active">
                 <div class="icon">
                     <i class="fa fa-money"></i>
                 </div>
             </a>
-            <a href="/Sale/Index" class="small-box-footer">
+            <a href="" [routerLink]="['/sales']" routerLinkActive="active" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -31,12 +31,12 @@
                 Purchases
             </p>
         </div>
-        <a href="/Purchase/Index">
+        <a href="" [routerLink]="['/purchases']" routerLinkActive="active">
             <div class="icon">
                 <i class="fa fa-truck"></i>
             </div>
         </a>
-        <a href="/Purchase/Index" class="small-box-footer">
+        <a href="" [routerLink]="['/purchases']" routerLinkActive="active" class="small-box-footer">
             More info <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
@@ -52,12 +52,12 @@
                 Products
             </p>
         </div>
-        <a href="/Product/Index">
+        <a href="" [routerLink]="['/products']" routerLinkActive="active">
             <div class="icon">
                 <i class="fa fa-gift"></i>
             </div>
         </a>
-        <a href="/Product/Index" class="small-box-footer">
+        <a href="" [routerLink]="['/products']" routerLinkActive="active" class="small-box-footer">
             More info <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
@@ -73,12 +73,12 @@
                 Customers
             </p>
         </div>
-        <a href="/Customer/Index">
+        <a href="" [routerLink]="['/customers']" routerLinkActive="active">
             <div class="icon">
                 <i class="fa fa-smile-o"></i>
             </div>
         </a>
-        <a href="/Customer/Index" class="small-box-footer">
+        <a href="" [routerLink]="['/customers']" routerLinkActive="active" class="small-box-footer">
             More info <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
@@ -94,12 +94,12 @@
                 Inventory Alert
             </p>
         </div>
-        <a href="/Inventory/Index">
+        <a href="" [routerLink]="['/inventories']" routerLinkActive="active">
             <div class="icon">
                 <i class="fa fa-warning"></i>
             </div>
         </a>
-        <a href="/Inventory/Index" class="small-box-footer">
+        <a href="" [routerLink]="['/inventories']" routerLinkActive="active" class="small-box-footer">
             More info <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
@@ -115,16 +115,42 @@
                 Suppliers
             </p>
         </div>
-        <a href="/Suppliers/Index">
+        <a href="" [routerLink]="['/suppliers']" routerLinkActive="active">
             <div class="icon">
                 <i class="fa fa-group"></i>
             </div>
         </a>
-        <a href="/Suppliers/Index" class="small-box-footer">
+        <a href="" [routerLink]="['/suppliers']" routerLinkActive="active" class="small-box-footer">
             More info <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
 </div><!-- ./col -->
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <ngx-charts-area-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="data"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            (select)="onSelect($event)">
+        </ngx-charts-area-chart>
+    </div>
+    <div class="col-md-6">
+        <ngx-charts-pie-grid
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="pieData"
+            (select)="onSelect($event)">
+        </ngx-charts-pie-grid>
+    </div>
 </div>
 <div class="row" style="padding:20px;padding-top: 0px;">
     <div class="box-header">

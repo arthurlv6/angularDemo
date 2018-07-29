@@ -34,7 +34,7 @@ export class SupplierAddEditComponent implements OnInit {
           id:supplier.id,
           name:[supplier.name,Validators.required],
           gstNumber: supplier.gstNumber,
-          note: [supplier.note,Validators.maxLength(400)],
+          note: [supplier.note,Validators.maxLength(4000)],
           taxRate: supplier.taxRate,
           bankName: supplier.bankName,
           bankBranch: supplier.bankBranch,
