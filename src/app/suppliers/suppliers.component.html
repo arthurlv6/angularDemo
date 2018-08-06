@@ -1,30 +1,31 @@
 <div class="row">
-    <div class="col-md-3">
-        
-    </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="input-group">
-            <input class="form-control" (keydown.enter)="onSearchKeydown($event)" id="Name" name="Name" placeholder="Name or gstNumber" type="text" [(ngModel)]="searchContent"
-                autocomplete="off">
+            <input class="form-control" (keydown.enter)="onSearchKeydown($event)" id="Name" name="Name" placeholder="Name or gstNumber"
+                type="text" [(ngModel)]="searchContent" autocomplete="off">
 
             <span class="input-group-btn">
                 <button type="button" name="seach" id="search-btn" (click)="search()" class="btn btn-primary">Search</button>
             </span>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="btn-group pull-right">
+
+
+    <div class="col-md-8 ">
+        <div class="btn-group float-right">
             <button class="btn btn-primary" (click)="addOrEdit()">Add</button>
-            <button class="btn btn-primary" >Import</button>
-            <button class="btn btn-primary" >Export</button>
+            <button class="btn btn-primary">Import</button>
+            <button class="btn btn-primary">Export</button>
         </div>
     </div>
 </div>
 <br>
 <div class="row" *ngIf="suppliers; else loading">
-    <div class="col-md-12">
-        <table class="table table-bordered table-hover table-condensed">
-            <tr class="info">
+    <div class="col-12"> 
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
                 <th>
                     Row
                 </th>
@@ -58,10 +59,13 @@
                 </th>
                 <th>Operation</th>
             </tr>
+        </thead>
+        <tbody>
             <ng-template ngFor let-supplier let-i=index [ngForOf]="filterSupplers()">
+                
                 <tr>
                     <td>
-                            {{i+1}}
+                        {{i+1}}
                     </td>
                     <td>
                         {{supplier.name}}
@@ -93,17 +97,19 @@
                     </td>
                 </tr>
             </ng-template>
+        </tbody>
         </table>
     </div>
 </div>
-
-<div class="row" *ngIf="total">
-    <div class="col-md-12">
-        <div class="text-center">
-            <pagination [totalItems]="total" [rotate]="false" [(ngModel)]="currentPage" [maxSize]="10" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination>
-        </div>
-    </div>
 </div>
+<div class="row justify-content-center">
+        <div class="col-md-4">
+                <div class="text-md-center" *ngIf="total">
+                            <pagination [totalItems]="total" [rotate]="false" [(ngModel)]="currentPage" [maxSize]="10" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination>
+                </div>
+            </div>
+</div>
+
 
 <ng-template #deleteConfirm>
     <div class="modal-header">

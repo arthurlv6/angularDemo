@@ -4,9 +4,7 @@ import { AppCommonService } from './app-common.service';
 @Component({
   selector: 'app-title',
   template: `
-  <h3>
   {{title}}
-  </h3>
   `,
   styles: []
 })

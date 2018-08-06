@@ -26,7 +26,6 @@ import { UnfinishedComponent } from './unfinished.component';
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot(),
-    BsDropdownModule.forRoot(),
   ],
   providers: [
     AuthServerService

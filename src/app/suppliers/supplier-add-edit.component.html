@@ -5,8 +5,10 @@
   </button>
 </div>
 <div class="modal-body">
+
   <div class="rows" *ngIf="supplierForm">
     <form [formGroup]="supplierForm" (ngSubmit)="saveSession()" autocomplete="off">
+      <div class="row">
       <div class="col-md-4">
         <div class="form-group" [ngClass]="{'error': supplierForm.get('name').invalid && supplierForm.get('name').dirty }">
           <label for="name">Name:</label>
@@ -14,59 +16,59 @@
           <input formControlName="name" id="name" type="text" class="form-control" placeholder="name..." />
         </div>
         <div class="form-group">
-          <label for="gstNumber">gstNumber:</label>
+          <label for="gstNumber">GST Number:</label>
           <input formControlName="gstNumber" id="gstNumber" type="text" class="form-control" placeholder="GST..." />
         </div>
 
         <div class="form-group">
-          <label for="taxRate">taxRate:</label>
+          <label for="taxRate">Tax Rate:</label>
           <input formControlName="taxRate" id="taxRate" type="text" class="form-control" placeholder="taxRate..." />
         </div>
         <div class="form-group">
-          <label for="bankName">bankName:</label>
+          <label for="bankName">Bank Name:</label>
           <input formControlName="bankName" id="bankName" type="text" class="form-control" placeholder="bankName..." />
         </div>
         <div class="form-group">
-          <label for="bankBranch">bankBranch:</label>
+          <label for="bankBranch">Bank Branch:</label>
           <input formControlName="bankBranch" id="bankBranch" type="text" class="form-control" placeholder="bankBranch..." />
         </div>
 
         <div class="form-group">
-          <label for="paymentTerm">paymentTerm:</label>
+          <label for="paymentTerm">Payment Term:</label>
           <input formControlName="paymentTerm" id="paymentTerm" type="text" class="form-control" placeholder="paymentTerm..." />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="physicalName">physicalName:</label>
+          <label for="physicalName">physical Name:</label>
           <input formControlName="physicalName" id="physicalName" type="text" class="form-control" placeholder="physicalName..." />
         </div>
         <div class="form-group">
-          <label for="physicalStreetAddress">physicalStreetAddress:</label>
+          <label for="physicalStreetAddress">Street Address:</label>
           <input formControlName="physicalStreetAddress" id="physicalStreetAddress" type="text" class="form-control" placeholder="physicalStreetAddress..."
           />
         </div>
         <div class="form-group">
-          <label for="physicalSuburb">physicalSuburb:</label>
+          <label for="physicalSuburb">Suburb:</label>
           <input formControlName="physicalSuburb" id="physicalSuburb" type="text" class="form-control" placeholder="physicalSuburb..."
           />
         </div>
         <div class="form-group">
-          <label for="physicalCity">physicalCity:</label>
+          <label for="physicalCity">City:</label>
           <input formControlName="physicalCity" id="physicalCity" type="text" class="form-control" placeholder="physicalCity..." />
         </div>
         <div class="form-group">
-          <label for="physicalState">physicalState:</label>
+          <label for="physicalState">State:</label>
           <input formControlName="physicalState" id="physicalState" type="text" class="form-control" placeholder="physicalState..."
           />
         </div>
         <div class="form-group">
-          <label for="physicalCountry">physicalCountry:</label>
+          <label for="physicalCountry">Country:</label>
           <input formControlName="physicalCountry" id="physicalCountry" type="text" class="form-control" placeholder="physicalCountry..."
           />
         </div>
         <div class="form-group">
-          <label for="physicalPostalCode">physicalPostalCode:</label>
+          <label for="physicalPostalCode">Postal Code:</label>
           <input formControlName="physicalPostalCode" id="physicalPostalCode" type="text" class="form-control" placeholder="physicalPostalCode..."
           />
         </div>
@@ -74,36 +76,36 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="contactFirstName">contactFirstName:</label>
+          <label for="contactFirstName">Contact Firstname:</label>
           <input formControlName="contactFirstName" id="contactFirstName" type="text" class="form-control" placeholder="contactFirstName..."
           />
         </div>
         <div class="form-group">
-          <label for="contactLastName">contactLastName:</label>
+          <label for="contactLastName">Contact Lastname:</label>
           <input formControlName="contactLastName" id="contactLastName" type="text" class="form-control" placeholder="contactLastName..."
           />
         </div>
         <div class="form-group">
-          <label for="contactEmail">contactEmail:</label>
+          <label for="contactEmail">Contact Email:</label>
           <input formControlName="contactEmail" id="contactEmail" type="text" class="form-control" placeholder="contactEmail..." />
         </div>
         <div class="form-group">
-          <label for="contactOfficePhone">contactOfficePhone:</label>
+          <label for="contactOfficePhone">Contact Office Phone:</label>
           <input formControlName="contactOfficePhone" id="contactOfficePhone" type="text" class="form-control" placeholder="contactOfficePhone..."
           />
         </div>
         <div class="form-group">
-          <label for="contactWebsite">contactWebsite:</label>
+          <label for="contactWebsite">Contact Website:</label>
           <input formControlName="contactWebsite" id="contactWebsite" type="text" class="form-control" placeholder="contactWebsite..."
           />
         </div>
         <div class="form-group">
-          <label for="contactPhoneNumber">contactPhoneNumber:</label>
+          <label for="contactPhoneNumber">Contact Phone Number:</label>
           <input formControlName="contactPhoneNumber" id="contactPhoneNumber" type="text" class="form-control" placeholder="contactPhoneNumber..."
           />
         </div>
         <div class="form-group">
-          <label for="contactMobileNumber">contactMobileNumber:</label>
+          <label for="contactMobileNumber">Contact Mobile Number:</label>
           <input formControlName="contactMobileNumber" id="contactMobileNumber" type="text" class="form-control" placeholder="contactMobileNumber..."
           />
         </div>
@@ -125,6 +127,7 @@
         </div>
           
       </div>
+    </div>
     </form>
   </div>
 </div>
