@@ -68,15 +68,18 @@
                         </li>
                     </ul>
                 </tab>
-                <tab style="margin-bottom: 10px;" heading="Images" *ngIf="product.productImages && product.productImages.length>0">
-                    <div class="col-sm-6 col-md-3" *ngFor="let pi of product.productImages">
-                        <div class="thumbnail">
-                            <img src={{pi.profile}} class="img-responsive" style="width:auto;height:140px;" (click)="showOrginalImage(image,pi.profile)"
-                                alt="...">
-                            <div class="caption">
-                                <h4>{{pi.description}}</h4>
+                <tab heading="Images" *ngIf="product.productImages && product.productImages.length>0">
+                    <div class="row" style="padding-top: 10px;">
+                        <ng-template ngFor let-pi let-i=index [ngForOf]="product.productImages">
+                            
+                            <div class="col">
+                                <img src={{pi.profile}} class="img-thumbnail" (click)="showOrginalImage(image,pi.profile)" alt="...">
+                                <div class="caption">
+                                    <h4>{{pi.description}}</h4>
+                                </div>
                             </div>
-                        </div>
+                            <div class="w-100" *ngIf="(i+1) % 3 ==0"></div>
+                        </ng-template>
                     </div>
                 </tab>
             </tabset>
@@ -104,6 +107,6 @@
         </button>
     </div>
     <div class="modal-body text-center">
-        <img src="{{imagePath}}">
+        <img src="{{imagePath}}" class="img-thumbnail">
     </div>
 </ng-template>

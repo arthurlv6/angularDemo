@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServerService } from './Shared/auth-server.service';
 import { HttpError } from './Models/http-error';
 import { Router } from '@angular/router';
+import { AppCommonService } from './Shared/app-common.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,10 @@ export class AppComponent implements OnInit {
   title = 'app';
   constructor(
     private _authService: AuthServerService,
-    private router :Router
+    private router :Router,
+    private _appCommonService: AppCommonService
   ) {}
+
   ngOnInit(): void {
     this._authService.getCurrentUser().subscribe(
       ()=>{
@@ -29,9 +32,22 @@ export class AppComponent implements OnInit {
     this._authService.change.subscribe(r => {
       this.loginRequired=r;
     });
+
+    this._appCommonService.linkClickDone.subscribe(() => {
+      this.menuShow=false;
+    });
   }
   logout():void{
     this._authService.logout();
     this.router.navigate(["login"]);
+  }
+  menuShow:boolean =false;
+  showMenu():void{
+    this.menuShow=!this.menuShow;
+    this.smallLeftMenu=false;
+  }
+  smallLeftMenu:boolean =false;
+  minimizeLeftMenu():void{
+    this.smallLeftMenu=!this.smallLeftMenu;
   }
 }

@@ -18,4 +18,10 @@ export class AppCommonService {
     this.supplierChanged.emit(supplier);
   }
   @Output() supplierChanged: EventEmitter<ISupplier> = new EventEmitter();
+
+  linkClick()
+  {
+    this.linkClickDone.emit();
+  }
+  @Output() linkClickDone: EventEmitter<void> = new EventEmitter();
 }
