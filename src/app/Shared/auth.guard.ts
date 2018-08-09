@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthServerService } from './auth-server.service';
 import { AppCommonService } from './app-common.service';
+import { CookieService } from '../../../node_modules/ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,13 @@ import { AppCommonService } from './app-common.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private _router: Router,
-    private _authService: AuthServerService,
-    private _appCommonService:AppCommonService,) { }
+    private _appCommonService:AppCommonService,
+    private _cookieService: CookieService,) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (this._authService.token===undefined){
+      let expiredDate=this._cookieService.get("tokenExpiration");
+      if( expiredDate === undefined || (new Date(expiredDate)) < new Date ){
         this._router.navigate(['/login']);
         return false;
       }

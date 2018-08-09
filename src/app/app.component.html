@@ -29,66 +29,17 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <li class="nav-item" title="Dashboard">
                 <a class="nav-link" href="" [routerLink]="['dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="" [routerLink]="['settings']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-gears"></i>
-                    <span class="nav-link-text">Settings</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products">
-                <a class="nav-link" href="" [routerLink]="['products']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-gift"></i>
-                    <span class="nav-link-text">Products</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventories">
-                <a class="nav-link" href="" [routerLink]="['inventories']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-sitemap"></i>
-                    <span class="nav-link-text">Inventories</span>
-                </a>
-            </li>
-
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Suppliers">
-                <a class="nav-link" href="" [routerLink]="['suppliers']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-group"></i>
-                    <span class="nav-link-text">Suppliers</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Purchase">
-                <a class="nav-link" href="" [routerLink]="['purchases']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-truck"></i>
-                    <span class="nav-link-text">Purchase</span>
-                </a>
-            </li>
-
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Customers">
-                <a class="nav-link" href="" [routerLink]="['customers']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-smile-o"></i>
-                    <span class="nav-link-text">Customers</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="money">
-                <a class="nav-link" href="" [routerLink]="['sales']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-money"></i>
-                    <span class="nav-link-text">Sales</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Report">
-                <a class="nav-link" href="" [routerLink]="['report']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-bar-chart-o"></i>
-                    <span class="nav-link-text">Report</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Website">
-                <a class="nav-link" href="" [routerLink]="['website']" routerLinkActive="active">
-                    <i class="fa fa-fw fa-cloud"></i>
-                    <span class="nav-link-text">Website</span>
+            <li class="nav-item" *ngFor="let item of roles" title={{item}}>
+                <a class="nav-link" [routerLink]="[item.toLowerCase()]" routerLinkActive="active">
+                    <i class="fa fa-fw" [ngClass]="{'settings':'fa-gears','products':'fa-gift','inventories':'fa-sitemap','suppliers':'fa-group',
+                    'purchases':'fa-truck','customers':'fa-smile-o','sales':'fa-money','report':'fa-bar-chart-o','website':'fa-cloud'}[item.toLowerCase()]"></i>
+                    <span class="nav-link-text">{{item}}</span>
                 </a>
             </li>
         </ul>

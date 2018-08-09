@@ -3,6 +3,7 @@ import { AuthServerService } from './Shared/auth-server.service';
 import { HttpError } from './Models/http-error';
 import { Router } from '@angular/router';
 import { AppCommonService } from './Shared/app-common.service';
+import { CookieService } from '../../node_modules/ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +12,26 @@ import { AppCommonService } from './Shared/app-common.service';
   providers:[]
 })
 export class AppComponent implements OnInit {
-  loginRequired:boolean=(this._authService.token===undefined);
-
+  loginRequired:boolean=false;
   title = 'app';
+  roles:string[];
   constructor(
     private _authService: AuthServerService,
     private router :Router,
-    private _appCommonService: AppCommonService
+    private _appCommonService: AppCommonService,
+    private _cookieService: CookieService,
   ) {}
 
   ngOnInit(): void {
+    this.roles=this._cookieService.get("roles").split(",");
+    console.info(this.roles);
+    let expiredDate=this._cookieService.get("tokenExpiration");
+
+    if( expiredDate === undefined || (new Date(expiredDate)) < new Date )
+    {
+      this.loginRequired=true;
+    }
+
     this._authService.getCurrentUser().subscribe(
       ()=>{
         this.router.navigate(["dashboard"]);
@@ -37,6 +48,7 @@ export class AppComponent implements OnInit {
       this.menuShow=false;
     });
   }
+
   logout():void{
     this._authService.logout();
     this.router.navigate(["login"]);
