@@ -1,11 +1,9 @@
-<p>
-  settings works!
-</p>
-<div class="col">
-    <div class="btn-group float-right">
-        <button class="btn btn-light" [routerLink]="['company']" routerLinkActive="active" >Company</button>
-        <button class="btn btn-light" [routerLink]="['users']" routerLinkActive="active">Users</button>
-        <button class="btn btn-light" [routerLink]="['warehouse']" routerLinkActive="active" >Warehouse</button>
-    </div>
+
+<div class="btn-group float-left">
+    <button class="btn btn-light" [routerLink]="['company']" routerLinkActive="active" >Company</button>
+    <button class="btn btn-light" [routerLink]="['users']" routerLinkActive="active">Users</button>
+    <button class="btn btn-light" [routerLink]="['warehouse']" routerLinkActive="active" >Warehouse</button>
 </div>
-<router-outlet></router-outlet>
+<div style="clear: both;">
+    <router-outlet></router-outlet>
+</div>

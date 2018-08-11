@@ -21,7 +21,7 @@ export class AuthServerService extends HttpClientBaseService {
     super();
    }
   currentUser:IUser;
-
+  url:string;
   public login(creds:ICredential) {
     return this.http.post<Token>(HttpClientBaseService.rootUrl+"auth/token", creds)
     .pipe(map(response => {

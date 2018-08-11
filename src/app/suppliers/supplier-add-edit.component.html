@@ -7,7 +7,7 @@
 <div class="modal-body">
 
   <div class="rows" *ngIf="supplierForm">
-    <form [formGroup]="supplierForm" (ngSubmit)="saveSession()" autocomplete="off">
+    <form [formGroup]="supplierForm" (ngSubmit)="saveSupplier()" autocomplete="off">
       <div class="row">
       <div class="col-md-4">
         <div class="form-group" [ngClass]="{'error': supplierForm.get('name').invalid && supplierForm.get('name').dirty }">

@@ -58,7 +58,7 @@ export class SupplierAddEditComponent implements OnInit {
       )
   }
 
-  saveSession() {
+  saveSupplier() {
     let formValues=this.supplierForm.value;
     let supplier:ISupplier = {
       id: formValues.id,

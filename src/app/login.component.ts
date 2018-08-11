@@ -30,7 +30,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         success => {
           this.loading=false;
+          if(this._authService.url){
+            this.router.navigateByUrl(this._authService.url);
+          }else{
             this.router.navigate(["suppliers"]);
+          }
+          
         },
        err => {
          this.errorMessage = "Failed to login";

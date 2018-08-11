@@ -4,6 +4,7 @@ import { AuthGuard } from '../Shared/auth.guard';
 import { CompanyComponent } from './company.component';
 import { UsersComponent } from './users/users.component';
 import { SettingsComponent } from './settings.component';
+import { WarehouseComponent } from './warehouse.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
         path: 'users',
         canActivate: [AuthGuard],
         component: UsersComponent
+      },
+      {
+        path: 'warehouse',
+        canActivate: [AuthGuard],
+        component: WarehouseComponent
       },
     ]
   }
