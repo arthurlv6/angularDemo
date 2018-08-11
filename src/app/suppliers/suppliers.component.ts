@@ -18,7 +18,7 @@ export class SuppliersComponent implements OnInit {
     private _appCommonServie: AppCommonService
   ) { }
   ngOnInit() {
-    this._appCommonServie.setupTitle("Supplier");
+    
     this._appCommonServie.supplierChanged.subscribe(
       s => {
         if (s.id == 0) {

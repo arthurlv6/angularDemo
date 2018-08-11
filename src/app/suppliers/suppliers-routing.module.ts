@@ -19,6 +19,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: SuppliersComponent
   },
+  
 ];
 
 @NgModule({

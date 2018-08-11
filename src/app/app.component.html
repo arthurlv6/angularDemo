@@ -38,7 +38,7 @@
             <li class="nav-item" *ngFor="let item of roles" title={{item}}>
                 <a class="nav-link" [routerLink]="[item.toLowerCase()]" routerLinkActive="active">
                     <i class="fa fa-fw" [ngClass]="{'settings':'fa-gears','products':'fa-gift','inventories':'fa-sitemap','suppliers':'fa-group',
-                    'purchases':'fa-truck','customers':'fa-smile-o','sales':'fa-money','report':'fa-bar-chart-o','website':'fa-cloud'}[item.toLowerCase()]"></i>
+                    'purchases':'fa-truck','customers':'fa-smile-o','sales':'fa-money','reports':'fa-bar-chart-o','website':'fa-cloud'}[item.toLowerCase()]"></i>
                     <span class="nav-link-text">{{item}}</span>
                 </a>
             </li>

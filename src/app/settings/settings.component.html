@@ -1,0 +1,11 @@
+<p>
+  settings works!
+</p>
+<div class="col">
+    <div class="btn-group float-right">
+        <button class="btn btn-light" [routerLink]="['company']" routerLinkActive="active" >Company</button>
+        <button class="btn btn-light" [routerLink]="['users']" routerLinkActive="active">Users</button>
+        <button class="btn btn-light" [routerLink]="['warehouse']" routerLinkActive="active" >Warehouse</button>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ProductsModuleRoutingModule } from './products-module-routing.module';
+import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { ProductDetailComponent } from './product-detail.component';
@@ -10,7 +10,7 @@ import { SupplierDetailModalComponent } from '../suppliers/supplier-detail-modal
 @NgModule({
   imports: [
     AppCommonModule,
-    ProductsModuleRoutingModule,
+    ProductsRoutingModule,
     TabsModule.forRoot(),
   ],
   declarations: [
@@ -21,4 +21,4 @@ import { SupplierDetailModalComponent } from '../suppliers/supplier-detail-modal
     SupplierDetailModalComponent
   ]
 })
-export class ProductsModuleModule { }
+export class ProductsModule { }

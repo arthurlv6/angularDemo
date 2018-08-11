@@ -5,11 +5,12 @@ import { AppComponent } from './app.component';
 import { BsDropdownModule,CollapseModule,ModalModule,TabsModule,   } from 'ngx-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login.component';
-import { ProductsModuleModule } from './products/products-module.module';
+import { ProductsModule } from './products/products-module.module';
 import { AuthServerService } from './Shared/auth-server.service';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { AppCommonModule } from './Shared/app-common.module';
 import { UnfinishedComponent } from './unfinished.component';
+import { SettingsModule } from './settings/settings.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,9 +20,11 @@ import { UnfinishedComponent } from './unfinished.component';
   ],
   imports: [
     AppCommonModule,
-    ProductsModuleModule,
+    ProductsModule,
     SuppliersModule,
+    SettingsModule,
     AppRoutingModule,
+    
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     ModalModule.forRoot(),

@@ -3,7 +3,7 @@ import { AuthServerService } from './Shared/auth-server.service';
 import { HttpError } from './Models/http-error';
 import { Router } from '@angular/router';
 import { AppCommonService } from './Shared/app-common.service';
-import { CookieService } from '../../node_modules/ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -23,13 +23,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.roles=this._cookieService.get("roles").split(",");
-    console.info(this.roles);
+    //console.info(this.roles);
     let expiredDate=this._cookieService.get("tokenExpiration");
 
     if( expiredDate === undefined || (new Date(expiredDate)) < new Date )
     {
       this.loginRequired=true;
+    }else{
+      this.loginRequired=false;
+      this.roles=this._cookieService.get("roles").split(",");
     }
 
     this._authService.getCurrentUser().subscribe(
@@ -42,6 +44,7 @@ export class AppComponent implements OnInit {
     );
     this._authService.change.subscribe(r => {
       this.loginRequired=r;
+      this.roles=this._cookieService.get("roles").split(",");
     });
 
     this._appCommonService.linkClickDone.subscribe(() => {

@@ -22,9 +22,6 @@ export class ProductsComponent implements OnInit {
   ) { }
   products:Product[];
   ngOnInit() {
-    this._appCommonService.setupTitle("Products");
-    
-
     this._productService.getProducts().subscribe(
       (data:Product[]) => {
         this.products=data;

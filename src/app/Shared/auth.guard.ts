@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppCommonService } from './app-common.service';
-import { CookieService } from '../../../node_modules/ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,8 @@ export class AuthGuard implements CanActivate {
         return false;
       }
       this._appCommonService.linkClick();
+      this._appCommonService.setupTitle(state.url);
+      console.log(state.url);
     return true;
   }
 }

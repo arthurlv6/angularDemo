@@ -16,12 +16,11 @@ export class DashboardComponent implements OnInit {
     Object.assign(this, { pieData })
   }
   ngOnInit() {
-    this._appCommonServie.setupTitle("Dashboard");
   }
   data: any[];
   pieData: any[];
   
-  view: any[] = [];
+  view: any[] = [0,400];
   // options
   showXAxis = true;
   showYAxis = true;

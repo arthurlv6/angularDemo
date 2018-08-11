@@ -25,16 +25,16 @@ export class AuthServerService extends HttpClientBaseService {
   public login(creds:ICredential) {
     return this.http.post<Token>(HttpClientBaseService.rootUrl+"auth/token", creds)
     .pipe(map(response => {
-      this.change.emit(false);//not need login
       this._cookieService.set("token",response.token);
       this._cookieService.set("tokenExpiration",response.expiration.toString());
       this._cookieService.set("roles",response.roles.toString());
+      this.change.emit(false);//not need login
       return true;
     }));
   }
   public logout() {
-    this.change.emit(true);
     this._cookieService.deleteAll();
+    this.change.emit(true);
   }
   public getCurrentUser(): Observable<any|HttpError>{
     return this.http.get<any>(HttpClientBaseService.rootUrl+"auth/currentuser")
