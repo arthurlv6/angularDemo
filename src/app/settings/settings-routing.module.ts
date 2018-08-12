@@ -4,7 +4,7 @@ import { AuthGuard } from '../Shared/auth.guard';
 import { CompanyComponent } from './company.component';
 import { UsersComponent } from './users/users.component';
 import { SettingsComponent } from './settings.component';
-import { WarehouseComponent } from './warehouse.component';
+import { WarehouseComponent } from './warehouse/warehouse.component';
 
 const routes: Routes = [
   {

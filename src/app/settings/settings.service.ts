@@ -5,6 +5,9 @@ import { ICompany } from '../Models/ICompany';
 import { HttpError } from '../Models/http-error';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { IUser } from '../Models/iuser';
+import { IWarehouse } from '../Models/IWarehouse';
+import { IidValue } from '../Models/IIdValue';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +25,23 @@ export class SettingsService extends HttpClientBaseService {
     var url=HttpClientBaseService.rootUrl+"companies/"+company.id;
     var headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put<void>(url,company,{ headers })
+    .pipe(catchError(err=>this.handleError(err)));
+  }
+
+  //users
+  getUsers(): Observable<IUser[] | HttpError> {
+    var url=HttpClientBaseService.rootUrl+"users";
+    return this.http.get<IUser[]>(url).pipe(catchError(err=>this.handleError(err)));
+  }
+  //warehouse
+  getWarehouses(): Observable<IWarehouse[] | HttpError> {
+    var url=HttpClientBaseService.rootUrl+"warehouses";
+    return this.http.get<IWarehouse[]>(url).pipe(catchError(err=>this.handleError(err)));
+  }
+  updateWarehouse(idValue:IidValue):Observable<void|HttpError>{
+    var url=HttpClientBaseService.rootUrl+"warehouses/"+idValue.id;
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<void>(url,idValue,{ headers })
     .pipe(catchError(err=>this.handleError(err)));
   }
 }

@@ -1,3 +1,51 @@
-<p>
-  users works!
-</p>
+<div class="row" *ngIf="users; else loading">
+    <div class="col-12">
+            <div class="table-responsive">
+        <table class="table table-bordered table-hover table-condensed table-sm">
+            <tr style="background-color: darkgray;">
+                <th>
+                    Name
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>Operation</th>
+            </tr>
+            <ng-template ngFor let-user [ngForOf]="users">
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" value="{{user.name}}" (keydown.enter)="onKeydown(user,$event,'name')"/>
+                        
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{user.title}}" (keydown.enter)="onKeydown(user,$event,'title')"/>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{user.email}}" (keydown.enter)="onKeydown(user,$event,'email')"/>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{user.phone}}" (keydown.enter)="onKeydown(user,$event,'phone')"/>
+                    </td>
+                    <td>
+                        <a class="fa fa-pencil-square-o" ></a> |
+                        <a class="fa fa-trash" ></a>
+                    </td>
+                </tr>
+                <tr>
+                  <td colspan="5" *ngIf="roles.length>0">
+                    <label *ngFor="let role of roles">
+                      <input  type="checkbox" (change)="onChange(role,$event)" [checked]="checkRole(role,user.roles)" /> {{role}}
+                    </label>
+                  </td>
+                </tr>
+            </ng-template>
+        </table>
+        </div>
+    </div>
+</div>

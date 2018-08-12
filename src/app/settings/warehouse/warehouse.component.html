@@ -1,0 +1,39 @@
+<p class="full-right">{{message}}</p>
+<div class="row" *ngIf="warehouses; else loading">
+  <div class="col-12">
+          <div class="table-responsive">
+      <table class="table table-bordered table-hover table-condensed table-sm">
+          <tr style="background-color: darkgray;">
+              <th>
+                  Name
+              </th>
+              <th>
+                  Status
+              </th>
+              <th>
+                  Description
+              </th>
+              <th>Operation</th>
+          </tr>
+          <ng-template ngFor let-warehouse [ngForOf]="warehouses">
+              <tr>
+                  <td>
+                      <input (blur)="resetMessage()" type="text" class="form-control" value="{{warehouse.name}}" (keydown.enter)="onKeydown(warehouse,$event,'name')"/>
+                      
+                  </td>
+                  <td>
+                      <input (blur)="resetMessage()" type="text" class="form-control" value="{{warehouse.status}}" (keydown.enter)="onKeydown(warehouse,$event,'status')"/>
+                  </td>
+                  <td>
+                      <input (blur)="resetMessage()" type="text" class="form-control" value="{{warehouse.description}}" (keydown.enter)="onKeydown(warehouse,$event,'description')"/>
+                  </td>
+                  <td>
+                      <a class="fa fa-pencil-square-o" ></a> |
+                      <a class="fa fa-trash" ></a>
+                  </td>
+              </tr>
+          </ng-template>
+      </table>
+      </div>
+  </div>
+</div>

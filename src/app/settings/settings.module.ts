@@ -5,9 +5,9 @@ import { CompanyComponent } from './company.component';
 import { UsersComponent } from './users/users.component';
 import { SettingsComponent } from './settings.component';
 import { AppCommonModule } from '../Shared/app-common.module';
-import { WarehouseComponent } from './warehouse.component';
 import { SettingsService } from './settings.service';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { WarehouseComponent } from './warehouse/warehouse.component';
 
 @NgModule({
   imports: [
