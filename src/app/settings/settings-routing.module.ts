@@ -5,6 +5,7 @@ import { CompanyComponent } from './company.component';
 import { UsersComponent } from './users/users.component';
 import { SettingsComponent } from './settings.component';
 import { WarehouseComponent } from './warehouse/warehouse.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
         path: 'warehouse',
         canActivate: [AuthGuard],
         component: WarehouseComponent
+      },
+      {
+        path: 'categories',
+        canActivate: [AuthGuard],
+        component: CategoriesComponent
       },
     ]
   }

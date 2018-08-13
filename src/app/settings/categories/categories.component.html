@@ -1,0 +1,24 @@
+
+<p>{{message}}</p>
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
+  <div class="form-inline row-item">
+    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
+      [class.fa-caret-down]="!item.collapsed"></i>
+    <div class="form-check">
+
+      <label class="form-check-label">
+        <i class="fa fa-trash" aria-hidden="true" title="Remove" (click)="removeItem(item)"></i>
+      </label>
+      <label class="form-check-label">
+        <i class="fa fa-plus" aria-hidden="true" title="Add" (click)="removeItem(item)"></i>
+      </label>
+      <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
+          <input (blur)="resetMessage()" type="text" class="form-control" value="{{item.text}}" (keydown.enter)="onKeydown(item,$event,'name')"/>
+        
+      </label>
+    </div>
+  </div>
+</ng-template>
+
+<ngx-treeview [items]="items" [config]="config" [itemTemplate]="itemTemplate">
+</ngx-treeview>

@@ -24,7 +24,6 @@ import { SettingsModule } from './settings/settings.module';
     SuppliersModule,
     SettingsModule,
     AppRoutingModule,
-    
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     ModalModule.forRoot(),

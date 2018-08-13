@@ -4,8 +4,8 @@
             <input class="form-control" (keydown.enter)="onSearchKeydown($event)" id="Name" name="Name" placeholder="Name or gstNumber"
                 type="text" [(ngModel)]="searchContent" autocomplete="off">
 
-            <span class="input-group-btn">
-                <button type="button" name="seach" id="search-btn" (click)="search()" class="btn btn-primary">Search</button>
+            <span class="input-group-append">
+                <button type="button" name="seach" id="search-btn" (click)="search()" class="btn btn-default">Search</button>
             </span>
         </div>
     </div>
@@ -13,9 +13,9 @@
 
     <div class="col-md-8 ">
         <div class="btn-group float-right">
-            <button class="btn btn-primary" (click)="addOrEdit()">Add</button>
-            <button class="btn btn-primary">Import</button>
-            <button class="btn btn-primary">Export</button>
+            <button class="btn btn-secondary" (click)="addOrEdit()">Add</button>
+            <button class="btn btn-secondary">Import</button>
+            <button class="btn btn-secondary">Export</button>
         </div>
     </div>
 </div>

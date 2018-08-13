@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { IUser } from '../Models/iuser';
 import { IWarehouse } from '../Models/IWarehouse';
 import { IidValue } from '../Models/IIdValue';
+import { ICategory } from '../Models/ICategory';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,17 @@ export class SettingsService extends HttpClientBaseService {
   }
   updateWarehouse(idValue:IidValue):Observable<void|HttpError>{
     var url=HttpClientBaseService.rootUrl+"warehouses/"+idValue.id;
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<void>(url,idValue,{ headers })
+    .pipe(catchError(err=>this.handleError(err)));
+  }
+  //caegory
+  getCategories(): Observable<ICategory[] | HttpError> {
+    var url=HttpClientBaseService.rootUrl+"productcategories";
+    return this.http.get<ICategory[]>(url).pipe(catchError(err=>this.handleError(err)));
+  }
+  updateCategory(idValue:IidValue):Observable<void|HttpError>{
+    var url=HttpClientBaseService.rootUrl+"productcategories/"+idValue.id;
     var headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put<void>(url,idValue,{ headers })
     .pipe(catchError(err=>this.handleError(err)));

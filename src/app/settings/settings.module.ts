@@ -8,6 +8,8 @@ import { AppCommonModule } from '../Shared/app-common.module';
 import { SettingsService } from './settings.service';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { WarehouseComponent } from './warehouse/warehouse.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { TreeviewModule } from 'node_modules/ngx-treeview';
 
 @NgModule({
   imports: [
@@ -15,14 +17,16 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
     AppCommonModule,
     SettingsRoutingModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    TreeviewModule.forRoot()
   ],
   declarations: 
   [
     CompanyComponent, 
     UsersComponent, 
     SettingsComponent, 
-    WarehouseComponent
+    WarehouseComponent, 
+    CategoriesComponent
   ],
   providers:[SettingsService],
   exports:[

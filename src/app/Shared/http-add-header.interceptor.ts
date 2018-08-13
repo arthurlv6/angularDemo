@@ -14,7 +14,7 @@ export class HttpAddHeaderInterceptor implements HttpInterceptor{
         console.log(`AddHeaderInterceptor - ${req.url}`);
         let token=this._cookieService.get("token");
         let jsonReq: HttpRequest<any> = req.clone({
-          setHeaders: {Authorization:'Bearer '+token}
+          setHeaders: {Authorization:'Bearer '+token,}
         });
         
         return next.handle(jsonReq);
