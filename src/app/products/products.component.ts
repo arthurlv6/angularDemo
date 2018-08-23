@@ -31,7 +31,8 @@ export class ProductsComponent implements OnInit {
       }
       );
   }
-
+  searchContent:string;
+  
   //modal
   modalRef: BsModalRef;
   product:Product;

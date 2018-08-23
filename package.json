@@ -29,6 +29,7 @@
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^3.0.1",
     "ngx-cookie-service": "^1.0.10",
+    "ngx-spinner": "^6.1.2",
     "ngx-treeview": "^6.0.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

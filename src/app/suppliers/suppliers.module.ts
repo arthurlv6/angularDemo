@@ -8,7 +8,7 @@ import { SupplierDetailModalComponent } from './supplier-detail-modal.component'
 import { SupplierAddEditComponent } from './supplier-add-edit.component';
 import { PaginationModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './state/suppliers.reducer';
+import { reducer } from '../Shared/state/common.reducer';
 
 @NgModule({
   imports: [

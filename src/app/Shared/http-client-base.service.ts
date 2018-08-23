@@ -11,7 +11,7 @@ import { throwError } from 'rxjs';
 export class HttpClientBaseService {
     static version: string;
     //http://localhost:57989
-    //http://api.angular.arthurdid.net
+    //static rootUrl: string = "http://api.angular.arthurdid.net/api/"
     static rootUrl: string = "http://localhost:57989/api/";
     protected getDefaultRequestHeaders(storeId?: string) {
         let headers = new HttpHeaders();

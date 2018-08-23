@@ -1,26 +1,27 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Injector } from '@angular/core';
 import { SuppliersService } from './suppliers.service';
 import { ISupplier } from '../Models/isupplier';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
-import { AppCommonService } from '../Shared/app-common.service';
+import { BsModalRef } from 'ngx-bootstrap';
 import { SupplierAddEditComponent } from './supplier-add-edit.component';
 import { HttpError } from '../Models/http-error';
 import { Store, select } from '@ngrx/store';
-import * as fromSuppliers  from './state/suppliers.reducer';
+import * as fromCommonState  from '../Shared/state/common.reducer';
+import * as fromCommonActions from '../Shared/state/common.actions';
+import { BaseComponent } from '../Shared/base-component';
 @Component({
   selector: 'app-suppliers',
   templateUrl: './suppliers.component.html',
   styleUrls: ['./suppliers.component.css']
 })
-export class SuppliersComponent implements OnInit {
+export class SuppliersComponent extends BaseComponent implements OnInit {
   constructor(
     private _supplierService: SuppliersService,
-    private modalService: BsModalService,
-    private _appCommonServie: AppCommonService,
-    private _store:Store<fromSuppliers.SuppliersState>, 
-    ) { }
+    private _store:Store<fromCommonState.CommonState>, 
+    private injector: Injector,
+    ) {
+    super(injector);
+  }
   ngOnInit() {
-    
     this._appCommonServie.supplierChanged.subscribe(
       s => {
         if (s.modifiedDate == null) {
@@ -31,16 +32,23 @@ export class SuppliersComponent implements OnInit {
         }
       }
     );
-
-    this._store.pipe(select(fromSuppliers.getSupplierSearchWords)).subscribe(
-      suppliers=>{
-        if(suppliers){
-          this.searchContent=suppliers;
+    this._store.pipe(select(fromCommonState.getSupplierSelector)).subscribe(
+      state=>{
+        
+        if(state){
+          this.searchContent=state.searchWords;
+          if(state.sortByField){
+            if(state.sortByField.ascending){
+              this.sort=state.sortByField.name;
+            }else{
+              this.sort=state.sortByField.name+"Desc";
+            }
+          }
+          this.currentPage=state.pageNumber==0?1:state.pageNumber;
         }
         this.refreshSuppliersList();
       }
     );
-    
   }
 
   suppliers: ISupplier[];
@@ -55,13 +63,18 @@ export class SuppliersComponent implements OnInit {
   sort: string = "";
 
   private refreshSuppliersList() {
-    this._supplierService.getSuppliers(this.searchContent, this.sort, this.pageSize, 1)
+    this._spinner.show();
+    this._supplierService.getSuppliers(this.searchContent, this.sort, this.pageSize, this.currentPage)
       .subscribe(
         data => {
           this.suppliers = data;
           console.info(data);
         }, 
-        err => this.errorMessage = err.errorMessage);
+        err => this.errorMessage = err.errorMessage,
+        ()=>{
+          this._spinner.hide();
+        }
+      );
     this._supplierService.getTotal(this.searchContent)
     .subscribe(t => {
       this.total = t;
@@ -71,12 +84,41 @@ export class SuppliersComponent implements OnInit {
   }
 
   sortby(field: string) {
+    
+    let ascending:boolean=true;
+
     if (field == this.sort) {
-      field = field + "Desc";
+      this.sort = field + "Desc";
+      ascending=false;
+    }else{
+      this.sort = field;
     }
-    this.sort = field;
+    
+    this.refreshSuppliersList();
+
+    this._store.dispatch( new fromCommonActions.SortAction({name:field,ascending:ascending}));
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage=event.page;
+
+    this.refreshSuppliersList();
+
+    this._store.dispatch( new fromCommonActions.PageAction(this.currentPage));
+  }
+  filterSupplers() {
+    return this.suppliers.filter(d => d.deleted != true);
+  }
+  onSearchKeydown(event) {
+    this.search();
+  }
+  search() {
+    this._store.dispatch( new fromCommonActions.SearchAction(this.searchContent));
+    this.sort=null;
+    this.currentPage=1;
     this.refreshSuppliersList();
   }
+  //#region modal
   addOrEdit(supplier?: ISupplier) {
     if (supplier) {
       this.supplier = supplier;
@@ -89,42 +131,7 @@ export class SuppliersComponent implements OnInit {
     const initialState = {
       supplier: this.supplier,
     };
-    this.modalService.show(SupplierAddEditComponent, { initialState, class: "modal-lg" })
-  }
-  pageChanged(event: any): void {
-    this._supplierService.getSuppliers(this.searchContent, this.sort, this.pageSize, event.page).subscribe(
-      data => {
-        this.suppliers = data;
-        this.currentPage=event.page;
-      },
-      err => this.errorMessage = err.errorMessage
-    );
-  }
-  filterSupplers() {
-    return this.suppliers.filter(d => d.deleted != true);
-  }
-  onSearchKeydown(event) {
-    this.search();
-  }
-  search() {
-    this._store.dispatch({
-      type:'Search',
-      payload:this.searchContent
-    });
-    this._supplierService.getSuppliers(this.searchContent, undefined, this.pageSize, 1).subscribe(
-      data => {
-        this.suppliers = data;
-        this.sort="";
-      },
-      err => this.errorMessage = err.errorMessage
-    );
-
-    this._supplierService.getTotal(this.searchContent).subscribe(
-      t => {
-        this.total = t;
-      },
-      err => this.errorMessage = err.errorMessage
-    );
+    this._modalService.show(SupplierAddEditComponent, { initialState, class: "modal-lg" })
   }
   openModal(template: TemplateRef<any>, supplier: ISupplier, isDelete: boolean) {
     this.supplier = supplier;
@@ -132,7 +139,7 @@ export class SuppliersComponent implements OnInit {
     if (!isDelete)
       css = 'modal-lg';
     this.errorMessage=undefined;
-    this.modalRef = this.modalService.show(template, { class: css });
+    this.modalRef = this._modalService.show(template, { class: css });
   }
   showDetail(supplier: ISupplier) {
     supplier.hidden = !supplier.hidden;
@@ -152,4 +159,5 @@ export class SuppliersComponent implements OnInit {
   decline(): void {
     this.modalRef.hide();
   }
+  //#endregion
 }

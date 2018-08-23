@@ -1,5 +1,5 @@
 export interface IidValue {
-    id: number;
+    id: number|string;
     value: string;
     type?: string;
 } 

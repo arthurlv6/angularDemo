@@ -1,4 +1,5 @@
-<div class="row" *ngIf="users; else loading">
+<p class="full-right">{{message}}</p>
+<div class="row" *ngIf="users;">
     <div class="col-12">
             <div class="table-responsive">
         <table class="table table-bordered table-hover table-condensed table-sm">
@@ -20,27 +21,26 @@
             <ng-template ngFor let-user [ngForOf]="users">
                 <tr>
                     <td>
-                        <input type="text" class="form-control" value="{{user.name}}" (keydown.enter)="onKeydown(user,$event,'name')"/>
+                        <input type="text" class="form-control" value="{{user.name}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(user,$event,'name')"/>
                         
                     </td>
                     <td>
-                        <input type="text" class="form-control" value="{{user.title}}" (keydown.enter)="onKeydown(user,$event,'title')"/>
+                        <input type="text" class="form-control" value="{{user.title}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(user,$event,'title')"/>
                     </td>
                     <td>
-                        <input type="text" class="form-control" value="{{user.email}}" (keydown.enter)="onKeydown(user,$event,'email')"/>
+                        <input type="text" disabled class="form-control" value="{{user.email}}"/>
                     </td>
                     <td>
-                        <input type="text" class="form-control" value="{{user.phone}}" (keydown.enter)="onKeydown(user,$event,'phone')"/>
+                        <input type="text" class="form-control" value="{{user.phone}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(user,$event,'phone')"/>
                     </td>
                     <td>
-                        <a class="fa fa-pencil-square-o" ></a> |
                         <a class="fa fa-trash" ></a>
                     </td>
                 </tr>
                 <tr>
                   <td colspan="5" *ngIf="roles.length>0">
                     <label *ngFor="let role of roles">
-                      <input  type="checkbox" (change)="onChange(role,$event)" [checked]="checkRole(role,user.roles)" /> {{role}}
+                      <input  type="checkbox" (change)="onChange(role,$event,user)" [checked]="checkRole(role,user.roles)" /> {{role}}
                     </label>
                   </td>
                 </tr>
@@ -49,3 +49,6 @@
         </div>
     </div>
 </div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

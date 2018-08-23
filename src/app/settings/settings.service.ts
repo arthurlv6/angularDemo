@@ -34,6 +34,12 @@ export class SettingsService extends HttpClientBaseService {
     var url=HttpClientBaseService.rootUrl+"users";
     return this.http.get<IUser[]>(url).pipe(catchError(err=>this.handleError(err)));
   }
+  updateUser(idValue:IidValue):Observable<void|HttpError>{
+    var url=HttpClientBaseService.rootUrl+"users/"+idValue.id;
+    return this.http.put<void>(url,idValue)
+    .pipe(catchError(err=>this.handleError(err)));
+  }
+
   //warehouse
   getWarehouses(): Observable<IWarehouse[] | HttpError> {
     var url=HttpClientBaseService.rootUrl+"warehouses";

@@ -12,7 +12,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +22,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HttpClientModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
   declarations: [
      TitleComponent,
@@ -38,7 +39,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HttpClientModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
   providers:[
     CookieService,

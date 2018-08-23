@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { SettingsService } from '../settings.service';
 import { IUser, Role } from '../../Models/iuser';
+import { IidValue } from '../../Models/IIdValue';
+import { BaseComponent } from '../../Shared/base-component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends BaseComponent implements OnInit {
 
-  constructor(private _settingService:SettingsService,) { }
+  constructor(
+    private _settingService:SettingsService,
+    private injector: Injector,) {
+    super(injector);
+   }
   users:IUser[];
-  errorMessage:string;
+  message:string;
   roles:string[];
   ngOnInit() {
+    this._spinner.show();
     this._settingService.getUsers()
     .subscribe(
       data => {
@@ -21,13 +28,27 @@ export class UsersComponent implements OnInit {
         this.roles="Purchases,Website,Customers,Settings,Inventories,Suppliers,Sales,Reports,Products".split(",");
         console.info(this.roles);
       }, 
-      err => this.errorMessage = err.errorMessage);
+      err => this.message = err.errorMessage,
+      ()=>{
+        this._spinner.hide();
+      });
   }
-  onKeydown(user:IUser,event: any,type:String){
-    console.warn(type);
-    console.info(user.email);
-    console.info(event.target.value);
+
+  onKeydown(user:IUser,event: any,typeInput:string){
+    this._spinner.show();
+    let idValue:IidValue={id:user.id,value:event.target.value,type:typeInput };
+
+    this._settingService.updateUser(idValue)
+    .subscribe(
+      data => {
+        this.message="The value was changed.";
+      }, 
+      err => this.message = err.friendlyMessage,
+      ()=>{
+        this._spinner.hide();
+      })
   }
+
   onFilterChange(event:any){
     console.info(event.target.value);
   }
@@ -40,6 +61,19 @@ export class UsersComponent implements OnInit {
       return false;
     }
   }
-  onChange(role:Role,event:any)
-  {}
+  onChange(role:string,event:any,user:IUser)
+  {
+    event.target.defaultValue;
+
+    let idValue:IidValue={id:user.id,value:event.target.defaultValue,type:role };
+    this._settingService.updateUser(idValue)
+    .subscribe(
+      data => {
+        this.message="The value was changed.";
+      }, 
+      err => this.message = err.friendlyMessage);
+  }
+  resetMessage(){
+    this.message="";
+  }
 }

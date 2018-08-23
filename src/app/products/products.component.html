@@ -3,12 +3,12 @@
             <input type="text" class="form-control" placeholder="Name or gstNumber" aria-label="Name or gstNumber"
             [(ngModel)]="searchContent" autocomplete="off" aria-describedby="button-addon2">
             <div class="input-group-append">
-              <button class="btn btn-default" type="button" (click)="search()" id="button-addon2">Search</button>
+              <button class="btn btn-default" type="button" id="button-addon2">Search</button>
             </div>
     </div>
     <div class="col">
         <div class="btn-group float-right">
-            <button class="btn btn-secondary" (click)="addOrEdit()">Add</button>
+            <button class="btn btn-secondary" >Add</button>
             <button class="btn btn-secondary">Import</button>
             <button class="btn btn-secondary">Export</button>
         </div>
@@ -71,6 +71,9 @@
         </div>
     </div>
 </div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
 <ng-template #deleteConfirm>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Delete item</h4>
