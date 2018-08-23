@@ -9,7 +9,7 @@ import { SettingsService } from './settings.service';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { TreeviewModule } from 'node_modules/ngx-treeview';
+import { TreeviewModule } from 'ngx-treeview';
 
 @NgModule({
   imports: [

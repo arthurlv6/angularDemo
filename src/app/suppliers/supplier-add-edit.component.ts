@@ -98,7 +98,8 @@ export class SupplierAddEditComponent implements OnInit {
     }else{
       this._supplierService.addSupplier(supplier).subscribe(
         s=>{
-          this._appCommonServie.supllierChanged(supplier);
+          let newSupplier=s;
+          this._appCommonServie.supllierChanged(newSupplier);
           this.bsModalRef.hide();
         },
         (e:HttpError)=>{

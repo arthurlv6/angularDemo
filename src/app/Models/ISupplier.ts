@@ -32,6 +32,7 @@ export interface ISupplier {
     contactDDINumber?: string;
     contactTollFreeNumber?: any;
     modifiedDate?: any;
+    createdDate?: Date;
     deleted?: boolean;
     products?: any[];
     hidden?:boolean;

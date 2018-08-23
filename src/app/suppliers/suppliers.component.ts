@@ -5,7 +5,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AppCommonService } from '../Shared/app-common.service';
 import { SupplierAddEditComponent } from './supplier-add-edit.component';
 import { HttpError } from '../Models/http-error';
-
+import { Store, select } from '@ngrx/store';
+import * as fromSuppliers  from './state/suppliers.reducer';
 @Component({
   selector: 'app-suppliers',
   templateUrl: './suppliers.component.html',
@@ -15,13 +16,14 @@ export class SuppliersComponent implements OnInit {
   constructor(
     private _supplierService: SuppliersService,
     private modalService: BsModalService,
-    private _appCommonServie: AppCommonService
-  ) { }
+    private _appCommonServie: AppCommonService,
+    private _store:Store<fromSuppliers.SuppliersState>, 
+    ) { }
   ngOnInit() {
     
     this._appCommonServie.supplierChanged.subscribe(
       s => {
-        if (s.id == 0) {
+        if (s.modifiedDate == null) {
           //insert to top
           this.suppliers.unshift(s);
         } else {
@@ -29,7 +31,16 @@ export class SuppliersComponent implements OnInit {
         }
       }
     );
-    this.refreshSuppliersList();
+
+    this._store.pipe(select(fromSuppliers.getSupplierSearchWords)).subscribe(
+      suppliers=>{
+        if(suppliers){
+          this.searchContent=suppliers;
+        }
+        this.refreshSuppliersList();
+      }
+    );
+    
   }
 
   suppliers: ISupplier[];
@@ -48,6 +59,7 @@ export class SuppliersComponent implements OnInit {
       .subscribe(
         data => {
           this.suppliers = data;
+          console.info(data);
         }, 
         err => this.errorMessage = err.errorMessage);
     this._supplierService.getTotal(this.searchContent)
@@ -95,6 +107,10 @@ export class SuppliersComponent implements OnInit {
     this.search();
   }
   search() {
+    this._store.dispatch({
+      type:'Search',
+      payload:this.searchContent
+    });
     this._supplierService.getSuppliers(this.searchContent, undefined, this.pageSize, 1).subscribe(
       data => {
         this.suppliers = data;

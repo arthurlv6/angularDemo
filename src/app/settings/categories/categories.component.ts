@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TreeviewItem, TreeviewConfig, DownlineTreeviewItem, TreeviewHelper, TreeviewComponent } from 'node_modules/ngx-treeview';
+import { TreeviewItem, TreeviewConfig, DownlineTreeviewItem, TreeviewHelper, TreeviewComponent } from 'ngx-treeview';
 import { isNil, remove, reverse } from 'lodash';
 import { SettingsService } from '../settings.service';
 import { ICategory } from '../../Models/ICategory';

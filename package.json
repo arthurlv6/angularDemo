@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@ngrx/store": "^6.1.0",
+    "@ngrx/store-devtools": "^6.1.0",
     "@swimlane/ngx-charts": "^9.0.0",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.1.3",

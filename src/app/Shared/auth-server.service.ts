@@ -25,11 +25,41 @@ export class AuthServerService extends HttpClientBaseService {
     return this.http.post<Token>(HttpClientBaseService.rootUrl+"auth/token", creds)
     .pipe(map(response => {
       this._cookieService.set("token",response.token);
-      this._cookieService.set("tokenExpiration",response.expiration.toString());
-      this._cookieService.set("roles",response.roles.toString());
+      this._cookieService.set("tokenExpiration", response.expiration.toString());
+      //roles need to sort
+      this._cookieService.set("roles",this.OrderRoles(response.roles).toString());
       this.change.emit(false);//not need login
       return true;
     }));
+  }
+  OrderRoles(roles:string[]):string[]{
+    let newOrderedRoles:string[]=[];
+    if(roles.some(d=>d==="Settings")){
+      newOrderedRoles.push("Settings");
+    }
+    if(roles.some(d=>d==="Products")){
+      newOrderedRoles.push("Products");
+    }
+    if(roles.some(d=>d==="Inventories")){
+      newOrderedRoles.push("Inventories");
+    }
+    if(roles.some(d=>d==="Suppliers")){
+      newOrderedRoles.push("Suppliers");
+    }
+    if(roles.some(d=>d==="Purchases")){
+      newOrderedRoles.push("Purchases");
+    }
+    if(roles.some(d=>d==="Customers")){
+      newOrderedRoles.push("Customers");
+    }
+    if(roles.some(d=>d==="Reports")){
+      newOrderedRoles.push("Reports");
+    }
+    /*
+    if(roles.some(d=>d==="Website")){
+      newOrderedRoles.push("Website");
+    }*/
+    return newOrderedRoles;
   }
   public logout() {
     this._cookieService.deleteAll();

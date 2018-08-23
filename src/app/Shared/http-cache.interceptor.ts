@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpCacheInterceptorInterceptor implements HttpInterceptor{
+export class HttpCacheInterceptor implements HttpInterceptor{
 
   constructor(private _cacheService: HttpCacheService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     // pass along non-cacheable requests and invalidate cache
     if(req.method !== 'GET' || req.url.indexOf('currentuser')>0) {
-      console.log(`Invalidating cache: ${req.method} ${req.url}`);
+      //console.log(`Invalidating cache: ${req.method} ${req.url}`);
       this._cacheService.invalidateCache();
       return next.handle(req);
     }
@@ -25,8 +25,8 @@ export class HttpCacheInterceptorInterceptor implements HttpInterceptor{
 
     // return cached response
     if (cachedResponse) {
-      console.log(`Returning a cached response: ${cachedResponse.url}`);
-      console.log(cachedResponse);
+      //console.log(`Returning a cached response: ${cachedResponse.url}`);
+      //console.log(cachedResponse);
       return of(cachedResponse);
     }
 
@@ -35,7 +35,7 @@ export class HttpCacheInterceptorInterceptor implements HttpInterceptor{
       .pipe(
         tap(event => {
           if (event instanceof HttpResponse) {
-            console.log(`Adding item to cache: ${req.url}`);
+            //console.log(`Adding item to cache: ${req.url}`);
             this._cacheService.put(req.url, event);
           }
         })

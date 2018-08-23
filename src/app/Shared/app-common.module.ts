@@ -1,9 +1,9 @@
 import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TitleComponent } from './title.component';
 import { LoadingComponent } from './loading.component';
-import { HttpCacheInterceptorInterceptor } from './http-cache-interceptor.interceptor';
+import { HttpCacheInterceptor } from './http-cache.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpAddHeaderInterceptor } from './http-add-header.interceptor';
@@ -21,7 +21,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BrowserModule,
     HttpClientModule,
     NgxChartsModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    ReactiveFormsModule 
   ],
   declarations: [
      TitleComponent,
@@ -36,11 +37,12 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BrowserModule,
     HttpClientModule,
     NgxChartsModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    ReactiveFormsModule 
   ],
   providers:[
     CookieService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpAddHeaderInterceptor, multi: true },
   ]
 })

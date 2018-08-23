@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
 import { HttpClientBaseService } from '../Shared/http-client-base.service';
-import { ISupplier } from '../Models/isupplier';
-import { catchError } from 'rxjs/operators';
-import { ObserveOnMessage } from 'rxjs/internal/operators/observeOn';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { HttpError } from '../Models/http-error';
+import { ICustomer } from '../Models/ICustomer';
+import { catchError } from '../../../node_modules/rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SuppliersService extends HttpClientBaseService {
+
+export class CustomersService extends HttpClientBaseService {
 
   constructor(private http: HttpClient) {
     super();
@@ -36,9 +35,9 @@ export class SuppliersService extends HttpClientBaseService {
     return extral;
   }
 
-  getSupplier(id:number):Observable<ISupplier|HttpError>{
+  getSupplier(id:number):Observable<ICustomer|HttpError>{
     var url=HttpClientBaseService.rootUrl+"suppliers/"+id;
-    return this.http.get<ISupplier>(url)
+    return this.http.get<ICustomer>(url)
     .pipe(catchError(err=>this.handleError(err)));
   }
 
@@ -47,16 +46,16 @@ export class SuppliersService extends HttpClientBaseService {
       name="";
     }
     var url=HttpClientBaseService.rootUrl+"suppliers/total?name="+name;
-    return this.http.get<ISupplier>(url)
+    return this.http.get<ICustomer>(url)
     .pipe(catchError(err=>this.handleError(err)));
   }
-  addSupplier(supplier:ISupplier):Observable<ISupplier>{
+  addSupplier(customer:ICustomer):Observable<ICustomer>{
     var url=HttpClientBaseService.rootUrl+"suppliers";
-    return this.http.post<ISupplier>(url,supplier);
+    return this.http.post<ICustomer>(url,customer);
   }
-  updateSupplier(supplier:ISupplier):Observable<void|HttpError>{
-    var url=HttpClientBaseService.rootUrl+"suppliers/"+supplier.id;
-    return this.http.put<void>(url,supplier)
+  updateSupplier(customer:ICustomer):Observable<void|HttpError>{
+    var url=HttpClientBaseService.rootUrl+"suppliers/"+customer.Id;
+    return this.http.put<void>(url,customer)
     .pipe(catchError(err=>this.handleError(err)));
   }
   deleteSuppler(id:number):Observable<void|HttpError>{

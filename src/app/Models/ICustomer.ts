@@ -1,0 +1,36 @@
+export interface ICustomer {
+    Id: number;
+    Title: string;
+    FirstName: string;
+    MiddleName: string;
+    SurName: string;
+    OtherName: string;
+    ResidentalDetail: string;
+    HouseNum: string;
+    StreetName: string;
+    Suburb: string;
+    City: string;
+    PostCode: string;
+    LivePeriod: string;
+    HomePhone: string;
+    MobilePhone: string;
+    WorkPhone: string;
+    Email: string;
+    Dob: string;
+    NumOfDependant: string;
+    SalesReferenceNo: string;
+    CompanyReferenceNo: string;
+    CreatedDate: Date;
+    ModifiedDate: Date;
+    Remark: string;
+    CustomerReference: string;
+    TrustBalanceCl: number;
+    Credit: number;
+    BlacklistId: number;
+    IsInBlacklist: boolean;
+    UserId: number;
+    TrustBalanceCp: number;
+    Comment: string;
+    SettingId: number;
+    Deleted: boolean;
+}
