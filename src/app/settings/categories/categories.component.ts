@@ -1,19 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Injector } from '@angular/core';
 import { TreeviewItem, TreeviewConfig, DownlineTreeviewItem, TreeviewHelper, TreeviewComponent } from 'ngx-treeview';
 import { isNil, remove, reverse } from 'lodash';
 import { SettingsService } from '../settings.service';
 import { ICategory } from '../../Models/ICategory';
 import { IidValue } from '../../Models/IIdValue';
+import { BaseComponent } from '../../Shared/base-component';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent extends BaseComponent implements OnInit {
 
   constructor(
     private _settingService:SettingsService,
-  ) { }
+    private injector: Injector,
+  ) { super(injector);}
   
   @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
   config = TreeviewConfig.create({
@@ -26,7 +28,6 @@ export class CategoriesComponent implements OnInit {
   items: TreeviewItem[]=[];
   rows: string[];
   categories:ICategory[];
-  message:string;
   temporary:TreeviewItem;
 
   ngOnInit() {
@@ -38,7 +39,7 @@ export class CategoriesComponent implements OnInit {
 
         console.info(this.categories);
       }, 
-      err => this.message = err.friendlyMessage);
+      err => this._notifierService.notify("warning",err.friendlyMessage));
   }
   //#region  treeview
   createTreeviewItems(categories:ICategory[]){
@@ -96,11 +97,8 @@ export class CategoriesComponent implements OnInit {
     this._settingService.updateCategory(idValue)
     .subscribe(
       data => {
-        this.message="The value was changed.";
+        this._notifierService.notify("success","The change was saved.");
       }, 
-      err => this.message = err.friendlyMessage);
-  }
-  resetMessage(){
-    this.message="";
+      err => this._notifierService.notify("warning",err.friendlyMessage));
   }
 }

@@ -1,5 +1,5 @@
 <p class="full-right">{{message}}</p>
-<div class="row" *ngIf="warehouses; else loading">
+<div class="row" *ngIf="warehouses;">
   <div class="col-12">
           <div class="table-responsive">
       <table class="table table-bordered table-hover table-condensed table-sm">
@@ -13,22 +13,21 @@
               <th>
                   Description
               </th>
-              <th>Operation</th>
+              <th></th>
           </tr>
           <ng-template ngFor let-warehouse [ngForOf]="warehouses">
               <tr>
                   <td>
-                      <input (blur)="resetMessage()" type="text" class="form-control"  value="{{warehouse.name}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(warehouse,$event,'name')"/>
+                      <input  type="text" class="form-control"  value="{{warehouse.name}}"  (keydown.enter)="onKeydown(warehouse,$event,'name')"/>
                       
                   </td>
                   <td>
-                      <input (blur)="resetMessage()" type="text" class="form-control" value="{{warehouse.status}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(warehouse,$event,'status')"/>
+                      <input  type="text" class="form-control" value="{{warehouse.status}}"  (keydown.enter)="onKeydown(warehouse,$event,'status')"/>
                   </td>
                   <td>
-                      <input (blur)="resetMessage()" type="text" class="form-control" value="{{warehouse.description}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(warehouse,$event,'description')"/>
+                      <input  type="text" class="form-control" value="{{warehouse.description}}"  (keydown.enter)="onKeydown(warehouse,$event,'description')"/>
                   </td>
                   <td>
-                      <a class="fa fa-pencil-square-o" ></a> |
                       <a class="fa fa-trash" ></a>
                   </td>
               </tr>
@@ -37,6 +36,3 @@
       </div>
   </div>
 </div>
-<ng-template #loading>
-    <app-loading></app-loading>
-</ng-template>

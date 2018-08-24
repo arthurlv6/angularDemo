@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { SettingsService } from '../settings.service';
 import { IWarehouse } from '../../Models/IWarehouse';
 import { IidValue } from '../../Models/IIdValue';
+import { BaseComponent } from '../../Shared/base-component';
 
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
   styleUrls: ['./warehouse.component.css']
 })
-export class WarehouseComponent implements OnInit {
+export class WarehouseComponent extends BaseComponent implements OnInit {
 
-  constructor(private _settingService:SettingsService,) { }
+  constructor(private _settingService:SettingsService,private injector: Injector,) { super(injector);}
   warehouses:IWarehouse[];
   message:string;
   ngOnInit() {
@@ -30,11 +31,9 @@ export class WarehouseComponent implements OnInit {
     this._settingService.updateWarehouse(idValue)
     .subscribe(
       data => {
-        this.message="The value was changed.";
+        this._notifierService.notify("success","The value was changed.");
       }, 
-      err => this.message = err.friendlyMessage);
-  }
-  resetMessage(){
-    this.message="";
+      err => this._notifierService.notify("warning",err.friendlyMessage)
+    );
   }
 }

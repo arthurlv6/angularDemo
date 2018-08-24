@@ -17,7 +17,6 @@ export class UsersComponent extends BaseComponent implements OnInit {
     super(injector);
    }
   users:IUser[];
-  message:string;
   roles:string[];
   ngOnInit() {
     this._spinner.show();
@@ -28,7 +27,7 @@ export class UsersComponent extends BaseComponent implements OnInit {
         this.roles="Purchases,Website,Customers,Settings,Inventories,Suppliers,Sales,Reports,Products".split(",");
         console.info(this.roles);
       }, 
-      err => this.message = err.errorMessage,
+      err => this._notifierService.notify("warning",err.friendlyMessage),
       ()=>{
         this._spinner.hide();
       });
@@ -41,9 +40,9 @@ export class UsersComponent extends BaseComponent implements OnInit {
     this._settingService.updateUser(idValue)
     .subscribe(
       data => {
-        this.message="The value was changed.";
+        this._notifierService.notify("success","The change was saved.");
       }, 
-      err => this.message = err.friendlyMessage,
+      err => this._notifierService.notify("warning",err.friendlyMessage),
       ()=>{
         this._spinner.hide();
       })
@@ -69,11 +68,9 @@ export class UsersComponent extends BaseComponent implements OnInit {
     this._settingService.updateUser(idValue)
     .subscribe(
       data => {
-        this.message="The value was changed.";
+        this._notifierService.notify("success","The change was saved.");
       }, 
-      err => this.message = err.friendlyMessage);
-  }
-  resetMessage(){
-    this.message="";
+      err => this._notifierService.notify("warning",err.friendlyMessage)
+    )
   }
 }

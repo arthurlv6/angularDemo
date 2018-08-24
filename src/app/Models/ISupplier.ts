@@ -7,14 +7,6 @@ export interface ISupplier {
     bankName?: any;
     bankBranch?: string;
     paymentTerm?: any;
-    postalName?: string;
-    postalAddress?: any;
-    postalSuburb?: any;
-    postalCity?: any;
-    postalState?: any;
-    postalCountry?: any;
-    postalCode?: any;
-    physicalName?: any;
     physicalStreetAddress?: any;
     physicalSuburb?: any;
     physicalCity?: any;
@@ -29,9 +21,6 @@ export interface ISupplier {
     contactPhoneNumber?: any;
     contactFaxNumber?: string;
     contactMobileNumber?: any;
-    contactDDINumber?: string;
-    contactTollFreeNumber?: any;
-    modifiedDate?: any;
     createdDate?: Date;
     deleted?: boolean;
     products?: any[];

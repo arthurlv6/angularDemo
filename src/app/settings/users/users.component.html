@@ -1,4 +1,3 @@
-<p class="full-right">{{message}}</p>
 <div class="row" *ngIf="users;">
     <div class="col-12">
             <div class="table-responsive">
@@ -21,17 +20,17 @@
             <ng-template ngFor let-user [ngForOf]="users">
                 <tr>
                     <td>
-                        <input type="text" class="form-control" value="{{user.name}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(user,$event,'name')"/>
+                        <input type="text" class="form-control" value="{{user.name}}"  (keydown.enter)="onKeydown(user,$event,'name')"/>
                         
                     </td>
                     <td>
-                        <input type="text" class="form-control" value="{{user.title}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(user,$event,'title')"/>
+                        <input type="text" class="form-control" value="{{user.title}}"  (keydown.enter)="onKeydown(user,$event,'title')"/>
                     </td>
                     <td>
                         <input type="text" disabled class="form-control" value="{{user.email}}"/>
                     </td>
                     <td>
-                        <input type="text" class="form-control" value="{{user.phone}}" (blur)="resetMessage()" (keydown.enter)="onKeydown(user,$event,'phone')"/>
+                        <input type="text" class="form-control" value="{{user.phone}}"  (keydown.enter)="onKeydown(user,$event,'phone')"/>
                     </td>
                     <td>
                         <a class="fa fa-trash" ></a>

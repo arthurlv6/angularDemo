@@ -18,6 +18,7 @@ export class SuppliersComponent extends BaseComponent implements OnInit {
     private _supplierService: SuppliersService,
     private _store:Store<fromCommonState.CommonState>, 
     private injector: Injector,
+    
     ) {
     super(injector);
   }
@@ -57,6 +58,7 @@ export class SuppliersComponent extends BaseComponent implements OnInit {
   currentPage: number = 1;
   searchContent: string = null;
   pageSize: number = 15;
+  message:string;
   //modal
   modalRef: BsModalRef;
   supplier: ISupplier;
@@ -82,7 +84,23 @@ export class SuppliersComponent extends BaseComponent implements OnInit {
       err => this.errorMessage = err.errorMessage;
     });
   }
-
+  onKeydown(supplier:ISupplier,validField?:string){
+    if(validField==="name"){
+      if(supplier.name.length>40 || supplier.name.length<=3){
+        this._notifierService.notify('error', "No changed, because the supplier name length is between 3 and 10 characters.");
+        return;
+      }
+    }
+    this._supplierService.updateSupplier(supplier).subscribe(
+      ()=>{
+        this._notifierService.notify('success', 'The change was saved!');
+      },
+      (e:HttpError)=>{
+        this.message=e.message;
+        this._notifierService.notify('error', e.message);
+      }
+    )
+  }
   sortby(field: string) {
     
     let ascending:boolean=true;

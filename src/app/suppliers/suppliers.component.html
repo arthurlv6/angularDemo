@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-4">
         <div class="input-group">
-            <input class="form-control" (keydown.enter)="onSearchKeydown($event)" id="Name" name="Name" placeholder="Name or gstNumber"
+            <input class="form-control" (keydown.enter)="onSearchKeydown($event)" style="border:1px solid #ced4da;" id="Name" name="Name" placeholder="Name or gstNumber"
                 type="text" [(ngModel)]="searchContent" autocomplete="off">
 
             <span class="input-group-append">
@@ -25,93 +25,182 @@
 </ngx-spinner>
 
 <div class="row" *ngIf="suppliers;">
-    <div class="col-12"> 
-    <div class="table-responsive">
-        <table class="table table-hover table-bordered table-sm">
-            <thead class="thead-dark">
-            <tr>
-                <th>
-                    Row
-                </th>
-                <th>
-                    <a style="cursor: pointer;" (click)="sortby('name')">Name
-                        <i *ngIf="sort=='name'" class="fa fa-arrow-up"></i>
-                        <i *ngIf="sort=='nameDesc'" class="fa fa-arrow-down"></i>
-                    </a>
-                </th>
-                <th>
-                    GST Number
-                </th>
-                <th>
-                    Bank Name
-                </th>
-                <th>
-                    Payment Term
-                </th>
-                <th>
-                    <a style="cursor: pointer;" (click)="sortby('email')">Contact Email
-                        <i *ngIf="sort=='email'" class="fa fa-arrow-up"></i>
-                        <i *ngIf="sort=='emailDesc'" class="fa fa-arrow-down"></i>
-                    </a>
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Row
+                        </th>
+                        <th>
+                            <a style="cursor: pointer;" (click)="sortby('name')">Name
+                                <i *ngIf="sort=='name'" class="fa fa-arrow-up"></i>
+                                <i *ngIf="sort=='nameDesc'" class="fa fa-arrow-down"></i>
+                            </a>
+                        </th>
+                        <th>
+                            GST
+                        </th>
+                        <th>
+                            Street
+                        </th>
+                        <th>
+                            Mobile
+                        </th>
+                        <th>
+                            <a style="cursor: pointer;" (click)="sortby('email')">Email
+                                <i *ngIf="sort=='email'" class="fa fa-arrow-up"></i>
+                                <i *ngIf="sort=='emailDesc'" class="fa fa-arrow-down"></i>
+                            </a>
 
-                </th>
-                <th>
-                    <a style="cursor: pointer;" (click)="sortby('date')">Date
-                        <i *ngIf="sort=='date'" class="fa fa-arrow-up"></i>
-                        <i *ngIf="sort=='dateDesc'" class="fa fa-arrow-down"></i>
-                    </a>
-                </th>
-                <th>Operation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-template ngFor let-supplier let-i=index [ngForOf]="filterSupplers()">
-                
-                <tr>
-                    <td>
-                        {{i+1}}
-                    </td>
-                    <td>
-                        {{supplier.name}}
-                    </td>
-                    <td>
-                        {{supplier.gstNumber}}
-                    </td>
-                    <td>
-                        {{supplier.bankName}}
-                    </td>
-                    <td>
-                        {{supplier.paymentTerm}}
-                    </td>
-                    <td>
-                        {{supplier.contactEmail}}
-                    </td>
-                    <td>
-                        {{supplier.createdDate | date:'short'}}
-                    </td>
-                    <td>
-                        <a class="fa fa-chevron-circle-down" style="cursor:pointer" (click)="showDetail(supplier)"></a> |
-                        <a class="fa fa-pencil-square-o" (click)="addOrEdit(supplier)"></a> |
-                        <a class="fa fa-trash" (click)="openModal(deleteConfirm,supplier,true)"></a>
-                    </td>
-                </tr>
-                <tr *ngIf="supplier.hidden && supplier.hidden===true">
-                    <td colspan=8>
-                        <app-supplier-detail [supplier]="supplier"></app-supplier-detail>
-                    </td>
-                </tr>
-            </ng-template>
-        </tbody>
-        </table>
+                        </th>
+                        <th>
+                            <a style="cursor: pointer;" (click)="sortby('date')">Date
+                                <i *ngIf="sort=='date'" class="fa fa-arrow-up"></i>
+                                <i *ngIf="sort=='dateDesc'" class="fa fa-arrow-down"></i>
+                            </a>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-supplier let-i=index [ngForOf]="filterSupplers()">
+
+                        <tr>
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td>
+                                <input [(ngModel)]="supplier.name" type="text" class="form-control" (keydown.enter)="onKeydown(supplier,'name')" />
+                            </td>
+                            <td>
+                                <input [(ngModel)]="supplier.gstNumber" type="text" class="form-control" (keydown.enter)="onKeydown(supplier)" />
+                            </td>
+                            <td>
+                                <input [(ngModel)]="supplier.physicalStreetAddress" type="text" class="form-control" (keydown.enter)="onKeydown(supplier)"
+                                />
+                            </td>
+                            <td>
+                                <input [(ngModel)]="supplier.contactMobileNumber" type="text" class="form-control" (keydown.enter)="onKeydown(supplier)"
+                                />
+                            </td>
+                            <td>
+                                <input [(ngModel)]="supplier.contactEmail" type="text" class="form-control" (keydown.enter)="onKeydown(supplier)" />
+                            </td>
+                            <td>
+                                {{supplier.createdDate | date:'short'}}
+                            </td>
+                            <td>
+                                <a class="fa fa-chevron-circle-down" style="cursor:pointer" (click)="showDetail(supplier)"></a>
+                                |
+                                <a class="fa fa-pencil-square-o" (click)="addOrEdit(supplier)"></a> |
+                                <a class="fa fa-trash" (click)="openModal(deleteConfirm,supplier,true)"></a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="supplier.hidden && supplier.hidden===true">
+                            <td colspan=8>
+                                <div class="panel">
+                                    <div class="panel-body" style="background-color:white;padding:20px;">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="taxRate">Tax Rate:</label>
+                                                    <input [(ngModel)]="supplier.taxRate" id="taxRate" type="text" class="form-control" placeholder="taxRate..."  (keydown.enter)="onKeydown(supplier)"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bankName">Bank Name:</label>
+                                                    <input [(ngModel)]="supplier.bankName" id="bankName" type="text" class="form-control" placeholder="bankName..."  (keydown.enter)="onKeydown(supplier)"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bankBranch">Bank Branch:</label>
+                                                    <input [(ngModel)]="supplier.bankBranch" id="bankBranch" type="text" class="form-control" placeholder="bankBranch..."  (keydown.enter)="onKeydown(supplier)"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="paymentTerm">Payment Term:</label>
+                                                    <input [(ngModel)]="supplier.paymentTerm" id="paymentTerm" type="text" class="form-control" placeholder="paymentTerm..."  (keydown.enter)="onKeydown(supplier)"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="physicalSuburb">Suburb:</label>
+                                                    <input [(ngModel)]="supplier.physicalSuburb" id="physicalSuburb" type="text" class="form-control" placeholder="physicalSuburb..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="physicalCity">City:</label>
+                                                    <input [(ngModel)]="supplier.physicalCity" id="physicalCity" type="text" class="form-control" placeholder="physicalCity..."  (keydown.enter)="onKeydown(supplier)"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="physicalState">State:</label>
+                                                    <input [(ngModel)]="supplier.physicalState" id="physicalState" type="text" class="form-control" placeholder="physicalState..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="physicalCountry">Country:</label>
+                                                    <input [(ngModel)]="supplier.physicalCountry" id="physicalCountry" type="text" class="form-control" placeholder="physicalCountry..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="physicalPostalCode">Postal Code:</label>
+                                                    <input [(ngModel)]="supplier.physicalPostalCode" id="physicalPostalCode" type="text" class="form-control" placeholder="physicalPostalCode..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="contactFirstName">Contact Firstname:</label>
+                                                    <input [(ngModel)]="supplier.contactFirstName" id="contactFirstName" type="text" class="form-control" placeholder="contactFirstName..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contactLastName">Contact Lastname:</label>
+                                                    <input [(ngModel)]="supplier.contactLastName" id="contactLastName" type="text" class="form-control" placeholder="contactLastName..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="contactOfficePhone">Contact Office Phone:</label>
+                                                    <input [(ngModel)]="supplier.contactOfficePhone" id="contactOfficePhone" type="text" class="form-control" placeholder="contactOfficePhone..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contactWebsite">Contact Website:</label>
+                                                    <input [(ngModel)]="supplier.contactWebsite" id="contactWebsite" type="text" class="form-control" placeholder="contactWebsite..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contactPhoneNumber">Contact Phone Number:</label>
+                                                    <input [(ngModel)]="supplier.contactPhoneNumber" id="contactPhoneNumber" type="text" class="form-control" placeholder="contactPhoneNumber..." (keydown.enter)="onKeydown(supplier)"
+                                                    />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="note">Note:</label>
+                                                    <textarea [(ngModel)]="supplier.note" id="note" rows=3 class="form-control" placeholder="note..." (keydown.enter)="onKeydown(supplier)"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-</div>
 <div class="row justify-content-center">
-        <div class="col-md-4">
-                <div class="text-md-center" *ngIf="total">
-                            <pagination [totalItems]="total" [rotate]="false" [(ngModel)]="currentPage" [maxSize]="10" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination>
-                </div>
-            </div>
+    <div class="col-4">
+        <div class="text-md-center" *ngIf="total">
+            <pagination [totalItems]="total" [rotate]="false" [(ngModel)]="currentPage" [maxSize]="10" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
 </div>
 
 
