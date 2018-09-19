@@ -6,7 +6,6 @@ import { UsersComponent } from './users/users.component';
 import { SettingsComponent } from './settings.component';
 import { AppCommonModule } from '../Shared/app-common.module';
 import { SettingsService } from './settings.service';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TreeviewModule } from 'ngx-treeview';
@@ -16,8 +15,6 @@ import { TreeviewModule } from 'ngx-treeview';
     CommonModule,
     AppCommonModule,
     SettingsRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     TreeviewModule.forRoot()
   ],
   declarations: 

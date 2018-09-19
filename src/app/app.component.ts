@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     //console.info(this.roles);
     let expiredDate=this._cookieService.get("tokenExpiration");
 
-    if( expiredDate === undefined || (new Date(expiredDate)) < new Date )
+    if( expiredDate === undefined || expiredDate==="" || (new Date(expiredDate)) < new Date )
     {
       this.loginRequired=true;
     }else{
